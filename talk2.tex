@@ -1,0 +1,326 @@
+\documentclass[oneside]{amsart}
+\input{preamble}
+\input{notation}
+
+\renewcommand{\et}{_{\text{\'et}}}
+\newcommand{\etu}{^{\text{\'et}}}
+\newcommand{\cont}{_{\mathrm{cont}}}
+\newcommand{\proet}{_{\text{pro\'et}}}
+\newcommand{\comp}{_{\mathrm{comp}}}
+\DeclareMathOperator{\Fib}{Fib}
+
+\title{\texorpdfstring{$\ell$-adic Sheaves}{l-adic Sheaves}}
+\author{Leonardo Colombo}
+
+\begin{document}
+\maketitle
+
+\section{Pro-\'etale Topology}
+
+\textbf{Goal:} For a scheme $X$, we want a good cohomology theory with coefficients in $\Z_\ell$ or $\Q_\ell$ where $\ell$ is invertible on $X$.
+
+\'Etale cohomology only works with torsion coefficients.
+\begin{example}[Milne]
+	If $X$ is normal, then
+	\[
+	H^{1}\et(X,\Z_\ell) \isoto \Hom\cont\left( \pi_1\etu(X,\overline{x}),\Z_\ell \right) = 0.
+	\] 
+\end{example}
+If we instead put
+\begin{align*}
+	H^{1}\et(X,\Z_\ell) &\defeq \varprojlim H^{1}\et(X,\Z /\ell^{n}\Z) \\
+			    &= \Hom\cont(X,\Z_\ell).
+\end{align*}
+But this gives difficulties. Essentially we want
+\[
+D(X,\Z_\ell) = \varprojlim D(X,\Z /\ell^{n}\Z).
+\] 
+
+\textbf{Question:} Is there a site giving $H^{1}\et(X,\Z_\ell)$ directly? 
+
+\textbf{Answer:} Yes! The pro-\'etale site.
+
+\begin{definition}
+	A morphism $f:Y\to X$ is \defn{weakly-\'etale} if $f$ is flat and
+	\[
+	\Delta_f:Y\to Y\times_X Y
+	\] 
+	is flat.
+
+	$X\proet$ is the site of weakly-\'etale $X$-schemes, with fpqc covers. $\{\varphi_i:U_i\to U\} $ is such that for all $V\subset U$ affine open, there exist $V_i\subset U_i$ affine such that
+	\[
+	V = \bigcup_{i} \varphi_i(V_i).
+	\] 
+\end{definition}
+
+Why weakly-\'etale and not pro-\'etale?
+\begin{theorem}[BS 13]
+	Let $f:A\to B$ be a morphism of rings, then
+	\begin{enumerate}[(1)]
+		\item $f$ is \'etale if and only if it's weakly-\'etale and finitely presented,
+		\item if $f$ is ind-\'etale then it's weakly \'etale,
+		\item if $f$ is weakly \'etale then there exist
+			\[
+			\begin{tikzcd}
+				A \ar[r,"f"] & B \ar[r,"g"] & C
+			\end{tikzcd}
+			\] 
+			with $g$ faithfully flat and $gf$ ind-\'etale.
+	\end{enumerate}
+\end{theorem}
+\begin{corollary}
+	On rings, weakly-\'etale maps give the same topology as ind-\'etale maps.
+\end{corollary}
+\begin{proposition}
+	Weakly-\'etale maps are local on the source and target. Pro-\'etale maps are neither.
+\end{proposition}
+[BS, 4.1.12] is an example of a weakly-\'etale map which is not pro-\'etale.
+
+\section{Main Properties}
+\begin{definition}
+	Let $U$ be a scheme. It is \defn{weakly-contractible} if for all weakly-\'etale, faithfully flat maps $V\to U$, the map $f$ admits a section.
+\end{definition}
+\begin{theorem}[BS ?]
+	For all $X$, there exists a cover by weakly-contractible affine schemes.
+\end{theorem}
+\textbf{Consequences:}
+\begin{itemize}
+	\item $\varprojlim $ on $\N\op$-systems is exact.
+	\item $D(X\proet,\Z)$ is compactly generated and left complete.
+\end{itemize}
+
+\section{Topological Sheaves}
+Let $T$ be a topological spaces, then
+\[
+U \mapsto \Hom\cont(U,T)
+\] 
+is a pro-\'etale sheaf (?) When $T$ is discrete, this is the usual constant sheaf. We can define sheaves $\Z_\ell, \Q_\ell$ or $(R,\km)$ for a complete ring.
+
+\section{Profinite Sets}
+Let $S=\varprojlim_i S_i$ be a profinite set. Put
+\begin{align*}
+	\ul{S}_i &= X^{\coprod S_i}\in X\et \subset X\proet \\
+	\ul{S} &= \varprojlim \ul{S}_i.
+\end{align*}
+This gives a functor
+\begin{align*}
+	\cat{ProSet} &\longrightarrow X\proet \\
+	S &\longmapsto \ul{S}
+\end{align*}
+which is limit preserving.
+
+\begin{example}
+	Let $X=\Spec k$ for $k$ a separably closed field. Then
+	\[
+		(X\proet)^{?}\isoto \cat{ProSet}.
+	\] 
+\end{example}
+\begin{remark}
+	The sheaves given by $S_i$ and $S$ are represented by $\ul{S}_i,\ul{S}$.
+\end{remark}
+Hence we have
+\[
+R\Gamma\proet(X,\Z_\ell) \isoto \varprojlim R\Gamma\proet(X,\Z /\ell^{n}).
+\] 
+[BS, 5.1.6] $X\et\subset X\proet$ gives a pullback functor
+\[
+v^{*}:D^{+}(X\et) \to D^{+}(X\proet)
+\] 
+which is fully faithful. Hence for all discrete $\Lambda$ 
+\[
+H^{\bullet}\et(X,\Lambda) \isoto H^{\bullet}\proet(X,\Lambda).
+\] 
+
+\section{\texorpdfstring{Constructible sheaves on $X\et$}{Constructible sheaves on Xet}}
+\begin{definition}
+	$K\in D(X\et,\Lambda)$ is \defn{constructible} if there is a finite stratification $\{X_i\injto X\} $ by locally closed subschemes such that $K|_{X_i}$ are locally constant with perfect values.
+\end{definition}
+\begin{proposition}[BS 6.4.8]
+	$D(X\et,\Lambda)$ is compactly generated. Furthermore, compact and constructible objects are the same.
+\end{proposition}
+
+\section{\texorpdfstring{Constructible Sheaves on $X\proet$}{Constructible sheaves on Xproet}}
+Fix $\hat{R} = (R,\km)$ complete. Let $X$ be qcqs.
+\begin{definition}
+	A complex $\CF\in D(X\proet,\hat{R})$ is \defn{constructible} if it is
+	\begin{itemize}
+		\item complete,
+		\item $\CF\otimes R /\km$ is constructible in $D(X\et,R /\km)$.
+	\end{itemize}
+\end{definition}
+If $X$ is Noetherian, then
+\begin{itemize}
+	\item $\CF$ is constructible iff there is a finite stratification $\{X_i\injto X\} $ such that $\CF|_{X_i}$ is locally constant with perfect values,
+	\item when $R=E$ is an algebraic extension of $\Q_\ell$, then $K\in D(X\proet, E)$ is constructible if and only if it is bounded and all cohomology sheaves are locally free of finite rank on strata.
+\end{itemize}
+\section{Functors}
+\textbf{Warning:} All functors will be derived.
+Let $f:X\to Y$ be a morphism, one gets
+\begin{align*}
+	f^{*}: Y\proet &\longrightarrow X\proet \\
+	V &\longmapsto V\times_Y X.
+\end{align*}
+This gives us
+\begin{itemize}
+	\item the pushforward
+		\begin{align*}
+			f_*: D(X\proet) &\longrightarrow D(Y\proet) \\
+			\CF &\longmapsto \CF\circ f^{*}
+		\end{align*}
+	\item the pullback
+		\begin{align*}
+			f^{*}: D(Y\proet) &\longrightarrow D(X\proet)
+		\end{align*}
+		as a left Kan extension.
+\end{itemize}
+$f^{*}$ is a left adjoint to $f_*$:
+\begin{align*}
+	\Hom(f^{*}\CF,\CG) &\isoto \Hom(\colim_{h_U\to \CF}f^{*}h_U,\CG) \\
+			   &\isoto \colim_{h_U\to \CF}\Hom(f^{*}U,\CG) \\
+			   &\isoto \colim_{h_U\to \CF}\Hom(U,f_*\CG) \\
+			   &\isoto \Hom(\CF,f_*\CG).
+\end{align*}
+If $f$ is weakly-\'etale we get functors:
+\[
+f^{\sharp}:Y\proet \leftrightarrows X\proet:f_\sharp
+\] 
+which form an adjoint pair. Spiritually $f^{*}$ is $\CF\mapsto \CF\circ f_\sharp$.
+
+Also $f_\sharp$ is left adjoint to $f^{*}$. When $f=j$ is an open immersion $j_!\defeq j_\sharp$ is extension by zero.
+
+If $j:X\injto Y$ is an open immersion and we have $T\to X,V\to Y$ then
+\[
+\Hom_Y(V,T) = \begin{cases}
+	\Hom_X(T,V) & \text{if }V\text{ factors through X} \\
+	\emptyset & \text{otherwise}.
+\end{cases}
+\] 
+
+\textbf{Fact:} $f_*$ (under some assumptions) preserves colimits, so $f_*$ has a right adjoint.
+
+If $f=p$ is proper, we denote the adjoint $p^{!}$ and we put $p_! = p_*$. Then $(p_!,p^{!})$ is an adjoint pair.
+
+For any $f$ with a factorization as $f=pj$ with $p$ proper and $j$ an open immersion define
+\begin{align*}
+	f_! &\defeq p_!j_! = p_*j_\sharp \\
+	f^{!} &\defeq j^{*}p^{!}
+\end{align*}
+which form an adjoint pair $(f_!,f^{!})$. 
+\begin{remark}
+	$f_!$ is a functor on derived categories, it's not derived from an underlying functor on sheaves.
+\end{remark}
+
+\section{Preservation of Constructible Sheaves}
+(In nice cases.)
+
+Constructible sheaves are preserved by $f_*,f_!,f^{!}$. Pullback $f^{*}$ does not preserve them, but
+\[
+f^{*}\comp = (\text{completion}) \circ f^{*}
+\] 
+does. In all cases, one reduces to the case of \'etale torsion sheaves.
+
+We sketch the proof in the \'etale case. 
+
+We start with the $f^{*}$ case.
+A complex is constructible iff it's compact, and $f^{*}$ preserves compact objects since $f^{*}$ is a left adjoint to $f_*$ which preserves filtered colimits.
+
+Now $f^{!}$. We can reduce to the case of $f=i$ a closed immersion, with $j$ the open complement. We claim that
+\[
+i^{!}\CF = i^{*} \Fib(\CF\to j_*j^{*}\CF)
+\] 
+Put $C=\Fib(\CF\to j_*j^{*}\CF)$. We know that $j^{*}j_*\isoto \id$, so $j^{*}C=0$. We have the exact sequence
+\[
+\begin{tikzcd}
+	j_!j^{*}C \ar[r] & C \ar[r] & i_!i^{*}C
+\end{tikzcd}
+\] 
+[SGA4, XVII, 5.1.16] or [BS, 6.1]. Hence $C\isoto i_!i^{*}C$. Since $i_*$ is fully faithful ($i^{*}i_*\isoto \id$)
+\begin{align*}
+	\Hom(N,i^{*}C) &\isoto \Hom(i_*N,i_*i^{*}C) \\
+		       &\isoto Hom(i_*N,C) \\
+		       &\isoto \Hom(i_*N,\CF),
+\end{align*}
+where the last line follows from
+\[
+\Hom(i_*N,j_*j^{*}\CF) \isoto \Hom(j^{*}i_*N,j^{*}\CF) \isoto \Hom(0,j^{*}\CF) = 0.
+\] 
+
+Now $f_!$.
+\begin{theorem}[Fu 7.8.1]
+	Let $A$ be a Noetherian torsion ring, $f:X\to Y$ be a morphism and $\CF\in D_c(X,A)$. Then $f_!\CF\in D_c(Y,A)$.
+\end{theorem}
+The proof reduces to the cases of a closed immersion $i:X\injto \Aff_Y^{n}$ and $\pi:\Aff_Y^{1}\to Y$ for affine $Y$.
+
+Finally $f_*$. Let $A$ be a Noetherian such that $nA=0$ and $n$ is invertible on $S$.
+\begin{theorem}
+	Let $S$ be regular, Noetherian of dimension $\le 1$ and $f:X\to Y$ be an $S$-morphism of schemes of finite type over $S$. Let $\CF$ be a constructible sheaf of $A$-modules. Then $f_*\CF$ is constructible.
+\end{theorem}
+For proper $f=p$ we have $p_*=p_!$ so we are done. In general the proof is long and does a bunch of reductions to reduce to a ``trivial'' case of $X$ smooth of dimension $n$, $A=\Z /m$, $\CF$ locally constant and $Y=S$.
+
+We need the following facts:
+\begin{itemize}
+	\item $f_*\ul{\Hom}(-,f^{!}-) \isoto \ul{\Hom}(f_!-,-)$, 
+	\item $f^{!}A\isoto A(d)[2d]$ (Verdier duality),
+	\item $\CF\isoto \ul{\Hom}(\ul{\Hom}(\CF,A),A)$.
+\end{itemize}
+Then we see that
+\[
+	H^{2n-i}f_*f^{!} \isoto \ul{\Hom}(H^{i}\CF,\ul{\Hom}(\CF,A),A)(-n)
+\]
+and we can finish from there.
+
+\section{Biduality}
+Let $S$ be a regular, Noetherian of dimension $\le 1$. Let $A$ be Noetherian with $nA=0$ such that $n$ is invertible on $S$. Assume that $A$ is an injective $A$-module. For example, $A=\Z /m$.
+
+For all $f:X\to S$ of finite type, put $K_X=f^{!}A$ and for each $K\in D(X\et,A)$ one defines
+\[
+	\D K = \ul{\Hom}(K,K_X).
+\] 
+Put $D_{C,ft}(X\et,A)$ be the sheaves which are constructible of finite $\Tor$-dimension.
+
+\begin{theorem}[Fu]
+	If $\CF\in D_{c,ft}(X\et,A)$ then $\D\D\CF\isoto \CF$.
+\end{theorem}
+\begin{proof}[Proof idea]
+	\textbf{Step 1:} Take $X=S$, then we can prove it directly [Fu, 9.6.2].
+	
+	\textbf{Step 2:} For $f$ proper $f_*\CF\isoto f_*\D\D f$ and $f_*=f_!$, then
+	\begin{align*}
+		f_*\D\CF &\isoto f_*\ul{\Hom}(\CF,f^{!}A) \\
+			 &\isoto \ul{\Hom}(f_*\CF,A) \\
+			 &\isoto \D f_*\CF.
+	\end{align*}
+	Hence
+	\[
+	\begin{tikzcd}
+		f_*\CF \ar[r] \ar[d,"\isoto"] & f_*\D\D\CF \ar[d,"\isoto"] \\
+		\D\D f_*\CF \ar[r,"\isoto"] & \D f_*\D\CF
+	\end{tikzcd}
+	\] 
+	(note this diagram commutes but is not Cartesian).
+	\textbf{Step 3:} Reduce to Step 2. We reduce to $X$ proper and then take the cofiber
+	\[
+	\begin{tikzcd}
+		\CF \ar[r] & \D \D \CF \ar[r] & \Delta.
+	\end{tikzcd}
+	\] 
+	By induction on $\dim X$ one proves that $\Delta$ is supported on finitely many points and then $f_*\Delta=0$ implies that $\Delta=0$.
+\end{proof}
+
+\section{Verdier Duality}
+Let $S$ be Noetherian, $n$ be invertible on $S$ and $nA=0$. Let $f:X\to Y$ be smooth, $S$-compactifiable, of pure dimension $n$ and finite type. Then
+\[
+	f^{!} = f^{*}(d)[2d],
+\] 
+i.e.
+\[
+	f^{!}\CF = f^{*}\CF \otimes A(d)[2d].
+\] 
+
+\section{Artin Vanishing}
+[Milne, VI.7]
+\begin{corollary}
+	If $X$ is affine over $k$ a separable closed field and $\dim X=n$ and $\CF$ is torsion, then $R^{i}\pi_*\CF=0$ for $i>n$.
+\end{corollary}
+
+\end{document}

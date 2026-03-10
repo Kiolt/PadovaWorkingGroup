@@ -1,0 +1,186 @@
+\documentclass[oneside]{amsart}
+\input{preamble}
+
+\renewcommand{\A}{\mathbb{A}}
+\newcommand{\muT}{\mu_{\mathrm{Tam}}}
+\newcommand{\F}{\mathbb{F}}
+\DeclareMathOperator{\Bun}{Bun}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Ran}{Ran}
+\newcommand{\red}{_{\mathrm{red}}}
+\newcommand{\km}{\mathfrak{m}}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Shv}{Shv}
+\DeclareMathOperator{\Gr}{Gr}
+\def\D{\mathbb{D}}
+
+\title{Introduction}
+\begin{document}
+\maketitle
+
+\section{Motivation}
+
+\textbf{Problem:} ``Classify'' integral quadratic forms (even lattices) up to isomorphism.
+
+This is a hard problem, so we break it up by grouping lattices by ``genus''. $\Lambda,\Lambda'$ have the same genus if they become isomorphic over $\R,\Z_p$ for all $p$. Given a lattice, what can we tell about its genus?
+
+There is the Siegel Mass formula: let $\Lambda$ be a positive definite lattice of rank $n$ :
+\[
+\left| \left\{ \text{lattices of genus }\Lambda \right\}  \right| = c_n \prod_p m_p(\Lambda),
+\] 
+where $m_p(\Lambda)$ depends only on $\Lambda\otimes \Z_p$.
+
+We will refolmulate the LHS of this formula. Let $G=\ul{\Aut}(\Lambda)$, then
+\[
+\{\text{lattices of genus }\Lambda\} \isoto G(\Q)\setminus G(\A) /G(\A_0),
+\] 
+where 
+\begin{align*}
+	\A_0 &= \R\times \prod_p \Z_p \\
+	\A &= \Q\otimes \A_0.
+\end{align*}
+Let $\mu$ be a Haar measure on $G(\A)$, then
+\[
+\left| G(\Q)\setminus G(\A) /G(\A_0) \right| = \frac{\mu(G(\Q) \setminus G(\A))}{\mu(G(\A_0))}.
+\] 
+Note that the RHS is independent of $\mu$. But in fact for any semisimple, simply connected algebraic group $G$ over $\Q$ there is a canonical measure $\mu = \muT$, called the \defn{Tamagawa measure}, such that
+\[
+\muT\left( G(\Q) \setminus G(\A) \right) = 1.
+\] 
+
+\section{Function field analog}
+Let $X$ be a smooth projective curve of genus $g$ over $\F_q$. We replace $\Q$ by $K=K(X)$. We replace the adeles by
+\begin{align*}
+	\A_0 &= \prod_{x\in X}\OO_x \\
+	\A &= \A_0 \otimes K.
+\end{align*}
+Let $G$ be a group scheme over $X$ with a semisimple, simply connected generic fiber. In this case
+\[
+G(K)\setminus G(\A) /G(\A_0) = \Bun_G(X)(\F_q).
+\] 
+(The way you prove this is: you can trivialize every bundle away from finitely many points, then on formal neighbourhoods of these points, the quotients correspond to transition functions which preserve the trivialization.)
+
+\begin{theorem}[Gaitsgory--Lurie]
+	\[
+	\left| \Bun_G(\F_q) \right| = q^{\dim\Bun_G}\prod_{x\in X} \frac{|k_x|^{d}}{|G(k_x)|}
+	\] 
+	where $d=\dim G$.
+\end{theorem}
+By the Grothendieck-Lefschetz fixed point formula
+\[
+\left| \Bun_G(\F_q) \right| = \Tr(\Frob, H_c^{\bullet}(\Bun_G)) = q^{\dim \Bun_G}\Tr(\Frob^{-1}, H^{\bullet}(\Bun_G)).	
+\] 
+
+\section{Ran Space}
+We will need to introduce the \defn{Ran Space} $\Ran(X)$. It is a prestack parametrizing non-empty finite subsets of $X$. On $\Ran(X)$ there is a sheaf $B\red$ whose $!$-stalk at $\{x_1,\dots,x_n\} \in \Ran(X)$ is
+\[
+\bigotimes_{i=1}^{n} H\red^{\bullet}\left( \frac{\text{pt}}{G_{x_i}} \right) .
+\] 
+
+Then Gaitsgory proves the cohomological product formula
+\[
+H_c^{\bullet}(\Ran,B\red) \simto H\red^{\bullet}(\Bun_G)
+\] 
+for any algebraically closed field $k$. The informal picture is that $\Bun_G$ can be roughly seen as $\prod_x \frac{\text{pt}}{G_x}$ and so $H^{\bullet}(\Bun_G)$ can be roughly seen as $\bigotimes_x H^{\bullet}\left( \frac{\text{pt}}{G_x} \right) $.
+
+\section{Atiyah--Bott formula}
+First we recall the classical formula. Let $G_0$ be a semisimple group over an algebraically closed field $k$. For a field of coefficients $F$, we have
+\[
+	H^{\bullet}\left( \frac{\text{pt}}{G_0} \right) = F[t]^{W} \isoto F[f_1,\dots,f_r]
+\] 
+where $r$ is the rank of $G_0$ and $\deg f_i = 2d_i$ (where $d_i$ are the exponents of $G_0$). Note that the last isomorphism is non-canonical.
+\begin{example}
+	Let $G_0 = \SL_n$, then we get
+	\[
+		\frac{F[x_1,\dots,x_n]^{S_n}}{(x_1+\dots+x_n)} \isoto F[e_2,\dots,e_n]
+	\] 
+\end{example}
+Alternatively, let $\km$ be the augmentation ideal in $H^{\bullet}\left( \frac{\text{pt}}{G_0} \right) $ and
+\[
+M_0 = \frac{\km}{\km^2}.
+\] 
+Then
+\[
+	M_0 = \bigoplus_{i=1}^{r}F[-2d_i],\qquad H^{\bullet}\left( \frac{\text{pt}}{G_0} \right) \isoto \Sym^{\bullet}M_0.
+\] 
+If $k=\overline{\F_q}$ we can choose the latter isomorphism to be $\Frob$-equivariant and $\Frob$ acts on $F[-2d_i]$ by $q^{d_i}$.
+
+Let $G$ be a group scheme over $X$ (assume that all fibers of $G$ are semisimple). From $G$ we can construct a local system $M$ on $X$ whose fiber at $x\in X$ is the $M_0$ from the construction above applied to $G_0$.
+
+\begin{theorem}[Atiyah--Bott]
+	\[
+	H^{\bullet}(\Bun_G) \isoto \Sym^{\bullet}H^{\bullet}(X,M)
+	\] 
+	non-canonically.
+\end{theorem}
+\begin{proof}
+	By the cohomological product formula we need to show
+	\[
+	H_c^{\bullet}(\Ran,B\red) \isoto \Sym^{+}\left( H^{\bullet}(X,M) \right) .
+	\] 
+	There exists a symmetric monoidal convolution product on $\Shv^{!}(\Ran)$ such that $H_c^{\bullet}(-)$ is a symmetric monoidal functor.
+
+	It's enough to show that
+	\[
+	B\red \isoto \Sym^{+}(i_{x,!}M)
+	\] 
+	where $i_X:X\injto \Ran$.
+
+	Both sides have the structure of a ``commutative factorization algebra'' in $\Shv^{!}(\Ran)$. Roughly speaking $\CF$ is a factorization algebra if the $!$-stalk at $\{x_1,\dots,x_n\} $ is $\otimes_{i=1}^{n}!\text{-stalk at }\{x_i\} $.
+
+	So it's enough to prove this isomorphism after $!$-restriction to $X\injto \Ran$. If $G$ is constant $G=X\times G_0$ then 
+	\[
+	\text{LHS} = H\red^{\bullet}\left( \frac{\text{pt}}{G_0} \right) ,\qquad \text{RHS} = \Sym^{+}M.
+	\] 
+\end{proof}
+
+\section{Proof of the numerical product formula}
+We need to calculate
+\begin{align*}
+	\Tr(\Frob^{-1}, H^{\bullet}(Bun_G)) &= \Tr\left( \Frob^{-1}, \Sym^{\bullet}H^{\bullet}(X,M) \right)  \\
+	&= \frac{1}{\det(1-\Frob^{-1},H^{\bullet}(X,M))}
+\end{align*}
+Note that the first RHS converges by Deligne's Weil II paper. Now we will use the Grothendieck-Lefschetz formula
+\[
+\frac{1}{\det\left( 1-t\Frob^{-1},H^{\bullet}(X,M) \right) } = \prod_{x\in X}\frac{1}{\det\left( 1-t^{d_x}\Frob_x^{-1}, M_x \right) }
+\] 
+Setting $t=1$ we need to calculate
+\begin{align*}
+	\frac{1}{\det\left( 1-\Frob_x^{-1},M_x \right) } &= \Tr\left( \Frob^{-1}, \Sym^{\bullet}M_x \right)  \\
+	&= \Tr\left( \Frob^{-1}, H^{\bullet}\left( \frac{\text{pt}}{G_x} \right)  \right)  \\
+	&= \frac{|k_x|^{d}}{|G(k_x)|}.
+\end{align*}
+
+Putting this together we get
+\begin{align*}
+	q^{\dim\Bun_G}\left| \Bun_G(\F_q) \right| &= \Tr(\Frob^{-1}, H^{\bullet}(\Bun_G)) \\
+						  &= \prod_{x\in X} \frac{|k_x|^{d}}{|G(k_x)|}.
+\end{align*}
+
+\section{Roadmap to the proof of the cohomological product formula}
+The key input is non-abelian Poincar\'e duality (NPD). We define a space
+\[
+\Gr_{\Ran} = \left\{ S\in \Ran, P\in \Bun_G, \text{trivialization of }P\text{ away from }S \right\} .
+\] 
+\begin{theorem}[Non-abelian Poincar\'e Duality]
+	The projection map $\Gr_{\Ran}\to \Bun_G$ induces an isomorphism on homology.
+\end{theorem}
+We can reformulate NPD as follows. Let $\CA$ be the $!$-pushforward of $\omega$ under $\Gr_{\Ran}\to \Ran$, then
+\[
+H_c(\Ran,\CA) \simto H_\bullet(\Bun_G).
+\] 
+
+We then replace $\CA$ by $\CA\red$ which gives us
+\[
+H_c(\Ran,\CA\red) \simto H_\bullet ^{\text{red}}(\Bun_G).
+\] 
+Assuming NPD, we can reduce the cohomological product formula to
+\[
+	H_c(\Ran,\CA\red) = H_c(\Ran,B\red)^{\vee}.
+\] 
+This will follow from $B\red=\D\CA\red$, the Verdier dual.
+
+To prove this Verdier duality we will first construct a canonical map $B\red\to \D\CA\red$ and then show that it is an ismorphism. To do this we will use factorization: it's enough to check this is an isomorphism after $!$-restriction to $X\injto \Ran$.
+
+\end{document}

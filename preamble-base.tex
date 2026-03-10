@@ -1,0 +1,117 @@
+%% Fonts
+
+\def\sh{\mathcal}                   % sheaf font
+\def\bb{\mathbf}                    % bold font
+\def\cat{\mathsf}                   % category font
+\def\numfont{\mathbb}
+
+%% Font Letters
+
+\def\CA{\mathcal{A}}
+\def\CE{\mathcal{E}}
+\def\CF{\mathcal{F}}
+\def\CG{\mathcal{G}}
+\def\CL{\mathcal{L}}
+\def\OO{\mathcal{O}}
+\def\CX{\mathcal{X}}
+\def\b1{\mathbb{1}}
+
+%% Cohomology
+
+\def\CH{\mathrm{H}}                 % cohomology H
+\def\CHH{\check{\HH}}               % Čech cohomology H
+\def\RD{\mathrm{R}}                 % right derived R
+\def\LD{\mathrm{L}}                 % left derived L
+\def\dual#1{{#1}^\vee}              % dual
+\def\Tor{\operatorname{Tor}}        % Tor
+\def\Ext{\operatorname{Ext}}        % Ext
+\def\HdR{\mathrm{H}_{\mathrm{dR}}}  % de Rham cohomology
+\def\Zc{\underline{\mathbb{Z}}}     % constant sheaf with integer coeffs
+
+%% Categories
+
+\def\A{\cat{A}}                     % category A, usually abelian
+\def\C{\cat{C}}                     % category C
+\def\op{^\cat{op}}                  % opposite category
+\def\Set{\cat{Sets}}                % category of sets
+\def\Grp{\cat{Gps}}                 % category of groups
+\def\Alg{\cat{Alg}}                 % category of algebras
+\def\QCoh{\cat{QCoh}}               % category of quasicoherent sheaves
+\def\supertilde{{\,\widetilde{\,}\,}}   % use \supertilde instead of ^\sim
+\def\Map{\operatorname{Map}}        % morphisms (any category)
+\def\Hom{\operatorname{Hom}}        % morphisms (additive category)
+\def\iHom{\underline{\Hom}}         % interal hom
+\def\End{\operatorname{End}}        % endomorphisms
+\def\Aut{\operatorname{Aut}}        % automorphisms
+\def\ker{\operatorname{ker}}        % kernel
+\def\img{\operatorname{im}}         % image
+\def\coker{\operatorname{coker}}    % cokernel
+\def\pr{\operatorname{pr}}          % projection
+\def\EssIm{\operatorname{EssIm}}    % essential image
+\DeclareMathOperator*{\colim}{colim}   % colimit
+
+\def\DAet{\cat{DA}\et}
+\def\SH{\cat{SH}}
+\def\Sh{\cat{Sh}}                   % category of sheaves
+\def\PSh{\cat{PSh}}                 % category of presheaves
+
+%% Schemes
+
+\def\Proj{\operatorname{Proj}}      % Proj
+\def\Supp{\operatorname{Supp}}      % support
+\def\Spec{\operatorname{Spec}}      % Spec
+\def\Spf{\operatorname{Spf}}        % formal Spec
+\def\Aff{\mathbb A}                 % affine space
+\def\P{\mathbb{P}}                  % projective space
+\def\Pic{\operatorname{Pic}}        % Picard group
+
+%% Standard Operators
+
+\def\codim{\operatorname{codim}}    % codimension
+\def\id{\operatorname{id}}          % identity
+
+%% Arrows
+\renewcommand{\to}{\mathchoice{\longrightarrow}{\rightarrow}{\rightarrow}{\rightarrow}}
+\newcommand{\from}{\mathchoice{\longleftarrow}{\leftarrow}{\leftarrow}{\leftarrow}}
+\let\mapstoo\mapsto
+\renewcommand{\mapsto}{\mathchoice{\longmapsto}{\mapstoo}{\mapstoo}{\mapstoo}}
+\def\isoto{\simeq}                  % isomorphism
+\def\simto{\xrightarrow{\sim}}      % isomorphism arrow
+\def\surjto{\twoheadrightarrow}     % surjetion
+\def\injto{\hookrightarrow}         % injection
+
+%% Under/Over Accents
+
+\newcommand{\wh}[1]{\widehat{#1}}   % hat
+\newcommand{\wt}[1]{\widetilde{#1}}    % tilde
+\def\ul{\underline}                % underline
+
+%% Spaces
+
+\def\Z{\numfont Z}                  % integers
+\def\Q{\numfont Q}                  % rationals
+\def\N{\numfont N}                  % naturals
+\def\R{\numfont R}                  % reals
+\def\H{\mathcal H}
+
+%% Groups
+
+\def\GL{\bb{GL}}                   % general linear group
+\def\SL{\bb{SL}}                   % special linear group
+\def\Sp{\bb{Sp}}
+\def\PSp{\bb{PSp}}
+\def\GSp{\bb{GSp}}
+\def\det{\operatorname{det}}       % determinant
+
+%% Sub/Superscripts
+
+\def\et{^\text{\'et}}              % \'etale
+\def\an{^\text{an}}                % analytic
+\def\th{^\text{th}}                % th
+
+%% Misc
+
+\newcommand{\defn}[1]{\textbf{#1}}  % definition highlighting
+\def\defeq{:=}                     % definition equation
+\def\eps{\varepsilon}              % correct epsilon
+\newcommand{\gen}[1]{\left\langle\!\left\langle #1 \right\rangle\!\right\rangle}

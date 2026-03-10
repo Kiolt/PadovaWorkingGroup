@@ -1,0 +1,468 @@
+\documentclass[oneside]{amsart}
+\input{preamble}
+\input{notation}
+\usepackage[backend=biber,style=alphabetic]{biblatex}
+\addbibresource{pwg.bib}
+\usepackage[left]{showlabels}
+
+\newcommand{\CI}{\mathcal{I}}
+\DeclareMathOperator{\car}{char}
+\newcommand{\Spc}{\cat{Spc}}
+\newcommand{\PreStk}{\cat{PreStk}}
+\newcommand{\CY}{\mathcal{Y}}
+\newcommand{\CJ}{\mathcal{J}}
+\newcommand{\CK}{\mathcal{K}}
+\newcommand{\PrL}{\cat{Pr}^L}
+\newcommand{\PrR}{\cat{Pr}^R}
+\newcommand{\redu}{^{\mathrm{red}}}
+\DeclareMathOperator{\Fib}{Fib}
+
+\title{The Ran Space}
+\author{Micha{\l} Mruga{\l}a}
+
+\begin{document}
+\maketitle
+
+\setcounter{section}{0}
+\section{Coventions and Notation}
+\begin{itemize}
+	\item $k$ is an algebraically closed field.
+	\item $\Sch$ is the category of separated schemes of finite type over $k$.
+	\item A \defn{presheaf} on $\Sch$ is a functor $\Sch\op\to \cat{Set}$. We write $\PSh(\Sch)$ for the category of presheaves of schemes.
+	\item $\Fins$ is the category of finite-nonempty sets and surjective maps.
+	\item We ignore set theoretic issues.
+\end{itemize}
+
+\section{\texorpdfstring{The Ran Space and $\ell$-adic Sheaves}{The Ran Space and l-adic Sheaves}}
+\subsection{The Ran Space}
+\begin{definition}	
+	Let $X$ be a separated scheme. The \defn{Ran space} of $X$ is the presheaf with values
+	\[
+		(\Ran X)(S) = \left\{ I\subset X(S) \middle| I \in \Fins \right\}.
+	\] 
+\end{definition}
+We will show later that we can view $\Ran X$ as a colimit of schemes:
+\[
+\Ran X = \colim_{\CI\in (\Fins)\op} X^{\CI}
+\] 
+Since $X$ is separated, the morphisms $X^{\CJ}\to X^{\CI}$ for a morphism $\CI\to \CJ$ in $\Fins$ are closed embeddings. So $Ran X$ is similar to an ind-scheme, the difference being that the colimit is not filtered.
+
+This description of the Ran space suggests an answer to:
+
+\vspace{0.5em}
+\begin{center}
+	\textbf{Question:} What is the right notion of an $\ell$-adic sheaf on the Ran space?
+\end{center}
+\vspace{0.5em}
+
+It should be a colimit of $\ell$-adic sheaves on $X^{\CI}$. But we would like to do more, we would like to make sense of the entire category of sheaves on $\Ran X$ as a colimit of categories of sheaves on $X^{\CI}$.This is where higher category theory comes in.
+
+\subsection{\texorpdfstring{$\infty$-category of $\ell$-adic Sheaves}{Infinity-category of l-adic Sheaves}}
+In the last talk, to each scheme we associated the derived category $D(X,\Lambda)$ of $\ell$-adic sheaves with coefficients in
+\[
+\Lambda\in \left\{ \Z /\ell^{n}, \Z_\ell, \Q_\ell, \overline{\Q}_\ell \middle| \ell\neq \car k \right\} .
+\] 
+The compact objects are constructible sheaves and they generate $D(X,\Lambda)$ under filtered colimits.
+
+We adapt this definition to the world of $\infty$-categories as follows:
+\begin{enumerate}[(i)]
+	\item Let $\Shv_c(X)$ be the stable $\infty$-category of constructible $\ell$-adic sheaves with coefficients in $\Lambda$.
+	\item Let $\Shv(X)$ be the ind-completion of $\Shv_c(X)$. We call it the \defn{$\infty$-category of $\ell$-adic sheaves} on $X$.
+\end{enumerate}
+
+In fact, we have a functor
+\begin{align*}
+	\Shv:\Sch\op &\longrightarrow \iCat \\
+	S &\longmapsto \Shv(S) \\
+	(f:S\from S') &\longmapsto (f^{*}:\Shv(S)\to \Shv(S')).
+\end{align*}
+
+We want to make sense of the expression
+\[
+\Shv(\Ran X) \defeq \colim_{\CI\in (\Fins)\op}\Shv(X^{\CI}).
+\] 
+
+\subsection{Prestacks}
+Instead of just settling on a definition of $\ell$-adic sheaves for $\Ran X$ we will define it for a general (pre)stack. Recall that a stack is a category fibered in groupoids over $\Sch$ satisfying some descent conditions. If we ignore the descent conditions this is essentially the same thing as a pseudofunctor
+\[
+	\Sch\op \to \cat{Grpds}
+\] 
+to the 2-category of groupoids. Making this homotopy coherent we arrive at:
+\begin{definition}
+	A \defn{prestack} to be a contravariant functor
+	\[
+	\Sch\op\to \Spc
+	\] 
+	from the category of schemes to the $\infty$-category of spaces (aka $\infty$-groupoids). We write $\PreStk$ for the $\infty$-category of prestacks.
+\end{definition}
+We have fully faithful functors
+\[
+\Sch \injto \PSh(\Sch) \injto \PreStk
+\] 
+the latter preserving limits and filtered colimits. Now we can make sense of:
+
+\begin{proposition}\label{prop:rancolim}
+	The Ran space is a colimit of
+	\begin{align*}
+		F: (\Fins)\op &\longrightarrow \PreStk \\
+		\CI &\longmapsto X^{\CI}
+	\end{align*}
+	via
+	\begin{align*}
+		\ins_\CI(S): X^{\CI}(S) &\longrightarrow (\Ran X)(S) \\
+		f &\longmapsto \img(f).
+	\end{align*}
+\end{proposition}
+\begin{proof}
+	We claim that for a set $A$
+	\[
+	\Ran A = \left\{ I\subset A \middle| I\in \Fins \right\} \isoto \colim_{\CI\in \Fins}A^{\CI}
+	\] 
+	in the category of spaces. Since colimits in $\PreStk$ are computed pointwise, the result follows by taking $A=X(S)$.
+
+	By \cite[\href{https://kerodon.net/tag/02VF}{Tag 02VF}]{kerodon} the colimit is isomorphic to the space defined by the category $\cat{C}=\int_{(\Fins)\op} F$ whose:
+	\begin{itemize}
+		\item objects are pairs $(\CI,f:\CI\to A)$ for $\CI\in \Fins$,
+		\item morphisms $(\CI,f)\to (\CJ,g)$ are surjections $\sigma:\CJ\surjto \CI$ such that
+			\[
+			g = f\circ\sigma.
+			\] 
+	\end{itemize}
+	Note that that $\cat{C}$ decomposes as a coproduct:
+	\[
+		\cat{C} \isoto \coprod_{I\subset \Ran A}\cat{C}_I
+	\] 
+	where $(\CI,f)$ belong to $\cat{C}_I$ if and only if $\img(f) = I$. But now each $\cat{C}_I$ has an initial object $(I,\id_I)$, so $\cat{C}_I$ is contractible. Hence
+	\[
+		\cat{C} \simeq \coprod_{I\in \Ran A} \{*\} \isoto \Ran A.
+	\] 
+\end{proof}
+
+\subsection{\texorpdfstring{$\ell$-adic Sheaves on Prestacks}{l-adic Sheaves on Prestacks}}
+Recall the ``universal property of presheaves of spaces'' \cite[\href{https://kerodon.net/tag/03WH}{Tag 03WH}]{kerodon}: left Kan extension defines an equivalence
+\[
+	\Fun(\Sch,\cat{C}) \simto \Fun^{L}(\PreStk,\cat{C})
+\] 
+where $\Fun^{L}$ are colimit preserving functors. Hence taking $\cat{C}=\iCat\op$, reversing arrows and right Kan extending $\Shv$ gives us a limit preserving functor
+\[
+\Shv^{*}:\PreStk\op \to \iCat.
+\] 
+So we have defined the category of $\ell$-adic sheaves on any prestack! Now we just need to apply this to the Ran space to get
+\[
+\Shv^{*}(\Ran X) \isoto \lim_{\CI\in \Fins} \Shv(X^{\CI}).
+\] 
+Hold on, we wanted this to be a colimit\dots
+
+But there is a situation when we can identify a limit in $\iCat$ with a colimit:
+\begin{proposition}\label{prop:lim-colim}
+	Let $\Phi:\bb{I}\to \PrL$ be a functor and let $\Psi:\bb{I}\op\to \iCat$ be the functor defined as follows:
+	\begin{enumerate}[(i)]
+		\item On objects $\Phi$ and $\Psi$ agree.
+		\item On morphisms $\Psi(\alpha\op)$ is the right adjoint to $\Phi(\alpha)$.
+	\end{enumerate}
+	Then
+	\[
+	\colim \Phi \isoto \lim \Psi
+	\] 
+	in $\PrL$.
+\end{proposition}
+\begin{proof}[Informal Argument]
+	Let $L_i:\Phi(i)\to \cat{C}$ be a compatible family of morphisms §in $\PrL$. Taking right adjoints we get a compatible family of morphisms $R_i:\cat{C}\to \Psi(i)$ in $\PrR$. Now by the universal property of the limit, there is a unique morphism $R:\cat{C}\to \lim \Psi$ in $\PrR$ compatible with $R_i$. Taking the left adjoint we get a unique morphism $L:\lim \Psi\to \cat{C}$ in $\PrL$ compatible with $L_i$. So $\lim \Psi$ satisfies the universal property of the colimit. Finally, since the inclusion $\PrR\injto\iCat$ \cite[Proposition~5.5.3.18]{htt} preserves limits we are done.
+\end{proof}
+\begin{proof}[Proof]
+	The functor $\Psi$ is defined by using \cite[Proposition~5.5.3.4]{htt}. From the same proposition it follows that the limit of $\Psi$ in $\PrR$ is the colimit of $\Phi$ in $\PrL$. The final step of the argument is as in the informal proof.
+\end{proof}
+
+So as long as for a morphism $f$ of schemes $\Shv(f)$ is a right adjoint we will get what we want! But for a closed embedding $f$, the pullback $f^{*}$ is not a right adjoint. However, $f^{!}$ is, so we can get the right notion of sheaves on $\Ran X$ by modifying $\Shv$ to send $f\mapsto f^{!}$. Hence we define:
+\begin{definition}
+	Consider the functor
+	\begin{align*}
+		\Shv: \Sch\op &\longrightarrow \iCat \\
+		S &\longmapsto \Shv(S) \\
+		(f:S\from S') &\longmapsto (f^{!}:\Shv(S)\to \Shv(S')).
+	\end{align*}
+	Let $\Shv^{!}:\PreStk\op\to \iCat$ be its right Kan extension. If $\CY$ is a prestack, then $\Shv^{!}(\CY)$ is the \defn{$\infty$-category of $\ell$-adic sheaves} on $\CY$.
+\end{definition}
+
+For a general prestack $\CY$ we have
+\[
+\Shv^{!}(\CY) \isoto \lim_{S\in \Sch_{/\CY}} \Shv(S).
+\] 
+Since the inclusion $\PrL\injto \iCat$ preserves limits, we can compute this limit inside $\PrL$. Even better, we can compute it in the full subcategory $\iCatSt$ of $\PrL$ spanned by stable, presentable infinity categories. In particular, $\Shv^{!}$ is endowed with a symmetric monoidal structure, which defines symmetric monoidal structures on $\Shv^{!}(\CY)$ for $\CY\in \PreStk$.
+
+We call prestacks for which \Cref{prop:lim-colim} applies pseudo-schemes:
+\begin{definition}
+	Let $\CY$ be a prestack. We say $\CY$ is a \defn{pseudo-scheme} if and only if it's expressible as a colimit of schemes with proper transition morphisms.
+\end{definition}
+\begin{corollary}
+	Let
+	\[
+		\CY \isoto \colim_{i\in \cat{I}} S_i
+	\] 
+	be a pseudo-scheme. Then
+	\[
+		\Shv^{!}(\CY) \isoto \colim_{i\in \cat{I}}\Shv(S_i)
+	\] 
+	with transition maps given by $!$-pushforward.
+\end{corollary}
+\begin{remark}
+	For prestacks, such as ind-schemes or classifying stacks, where we have a good idea of what $\ell$-adic sheaves are supposed be this construction recovers the right thing.
+\end{remark}
+
+\subsection{\texorpdfstring{$\ell$-adic Sheaves on the Ran Space}{l-adic Sheaves on the Ran Space}}
+Let us unwind a sheaf $\CF\in \Shv^{!}(\Ran X)$ looks like.
+
+The limit description tells us that $\CF$ is the data of:
+\begin{itemize}
+	\item For every scheme $S\in \Sch$ and non-empty, finite subset $I\subset X(S)$ an $\ell$-adic sheaf $\CF_{S,I}$ on $S$.
+	\item For every morphism of schemes $f:S'\to S$ and non-empty, finite subset $I\subset X(S)$ an isomorphism
+		\[
+		\CF_{S',f(I)} \simto f^{!}\CF_{S,I}.
+		\] 
+\end{itemize}
+These isomorphism then need to satisfy higher coherences.
+
+The colimit description tells us that $\CF$ is the data of:
+\begin{itemize}
+	\item For every non-empty, finite set $\CI$ an $\ell$-adic sheaf $\CF_\CI$ on $X^{\CI}$.
+	\item For every surjective map $\CJ\surjto \CI$ of sets an isomorphism
+		\[
+		f_!\CF_{\CI} \simto \CF_{\CJ},
+		\] 
+		where $f:X^{\CI}\to X^{\CJ}$ is the morphism corresponding to $\CJ\surjto \CI$.
+\end{itemize}
+These isomorphisms need to satisfy higher coherences.
+
+\subsection{Homology}
+Derived pushforwards are perhaps the most important tool for computations in cohomology, so if we want to get any decent understanding of $\Shv^{!}(\Ran X)$ it would be good to have access to them. On its face it's not at all obvious that for a morphism $f:\CY_1\to \CY_2$ either $f_*$ or $f_!$ should exist.
+
+First, note that we are given $f^{!}$ for free by the definition of $\Shv^{!}$.
+
+\begin{proposition}
+	The right adjoint $f_!$ to $f^{!}$ exists.
+\end{proposition}
+\begin{proof}
+	By the Adjoint Functor Theorem \cite[Corollary~5.5.2.9(ii)]{htt} it suffices to show that $f^{!}$ preserves limits. This is the content of \Cref{lmm:pres-lim}.
+\end{proof}
+
+\begin{lemma}\label{lmm:pres-lim}
+	$f^{!}$ preserves limits.
+\end{lemma}
+\begin{proof}
+	Note that for $(S,y)\in \Sch_{/\CY}$ and a family $\CF^{i}\in \Shv^{!}(\CY)$ indexed by $\cat{I}$ we have
+	\[
+		\left( \lim_{i\in \cat{I}}\CF^{i} \right)_{S,y} \isoto \lim_{i\in \cat{I}} \CF^{i}_{S,y}.
+	\] 
+	But exceptional pullback for schemes preserves limits, so we are done.
+\end{proof}
+
+This allows us to define the \emph{homology} of a prestack $\CY$ as follows. Taking $\CY_1=\CY$ and $\CY_2=\Spec k$ we get a functor
+\begin{align*}
+	f_!: \Shv^{!}(\CY) &\longrightarrow \lMod \\
+	\CF &\longmapsto C_c^{*}(\CY,\CF).
+\end{align*}
+\begin{definition}
+	Let $\CY$ be a prestack, $p_\CY:\CY\to \Spec k$ be the structure morphism and $p_\CY^{!}:\lMod\to \Shv^{!}(\CY)$ be the functor defined by $p_\CY$. The \defn{dualizing sheaf} on $\CY$ is
+	\[
+	\omega_\CY \defeq p_\CY^{!}\Lambda.
+	\] 
+\end{definition}
+\begin{definition}
+	The \defn{homology} of a prestack $\CY$ is
+	\[
+	C_*(\CY) \defeq C^{*}_c(\CY,\omega_\CY).
+	\] 
+	The \defn{reduced homology} of $\CY$ is
+	\[
+	C_*\redu(\CY) \defeq \Fib(C_*(\CY)\to C_*(\Spec k)) = \Fib \left( p_{\CY,!}p_\CY^{!}\Lambda \to \Lambda \right) .	
+	\] 
+\end{definition}
+
+We actually know what the homology of the Ran space is!
+\begin{theorem}[Beilinson--Drinfeld]
+	Suppose $X$ is separeted and connected. Then the structure morphism $\Ran X\to \Spec k$ induces a quasi-isomorphism
+	\[
+	C_*(\Ran X) \simto C_*(\Spec k).
+	\] 
+\end{theorem}
+\begin{proof}
+	See \cite[Theorem~2.4.5]{weil}.
+\end{proof}
+\begin{corollary}
+	We have canonical isomorphisms
+	\[
+	H_q(\Ran X) \isoto \begin{cases}
+		\Lambda & \text{if }q=0 \\
+		0 & \text{otherwise}.
+	\end{cases}
+	\] 
+\end{corollary}
+
+\subsection{Computing the Pushforward I}
+The next natural step in understanding the Ran space is to compute
+\begin{equation}\label{eq:ins2}
+\ins_\CJ^{!}\ins_{\CI,!} \CF
+\end{equation} 
+for $\CI,\CJ\in \Fins$ and $\CF\in \Shv(X^{\CI})$. For a general morphism $f$ of prestacks $f_!$ is intractable, but fortunately for prestacks similar to the Ran space we can do better.
+
+But first, we show that in the case of the Ran space understanding \eqref{eq:ins2} in a real sense describes all of the sheaves on it.
+
+\begin{lemma}
+	Let
+	\[
+		\CY = \colim_{i\in \cat{I}}Z_i
+	\] 
+	be a pseudo-scheme. Then $\ins_i^{!}$ preserve colimits.
+\end{lemma}
+\begin{proof}
+	This is because colimits in $\Shv^{!}(\CY)$ are computed pointwise.
+\end{proof}
+\begin{corollary}
+	Let
+	\[
+		\CY = \colim_{i\in \cat{I}}Z_i
+	\] 
+	be a pseudo-scheme and $\CF\in \Shv^{!}(Y)$. Then the natural map
+	\[
+		\colim_{i\in \cat{I}} \ins_{i,!}\ins_i^{!}\CF \to \CF
+	\] 
+	is an isomorphism.
+\end{corollary}
+
+Now we suss out the properties of $\Ran X$ that allow us to compute $\ins_{\CI,!}$.
+
+\begin{definition}
+	A morphism $f:\CY\to S$ of prestacks with $S\in \Sch$ is \defn{pseudo-proper} if $\CY$ can be expressed as a colimit of proper schemes over $S$.
+\end{definition}
+\begin{proposition}
+	Let
+	\[
+	\begin{tikzcd}
+		\CY' \ar[r,"g_\CY"] \ar[d,"f'"] & \CY \ar[d,"f"] \\
+		S' \ar[r,"g_S"] & S
+	\end{tikzcd}
+	\] 
+	be a Cartesian diagram in $\PreStk$ with $S,S'\in \Sch$ and $f$ pseudo-proper. Then the natural morphism
+	\[
+	f'_!\circ g_\CY^{!} \to g_S^{!} \circ f_!
+	\] 
+	is an isomorphism.
+\end{proposition}
+\begin{proof}
+	Follows from Proper Base Change for schemes.
+\end{proof}
+\begin{definition}
+	A morphism $f:\CY_1\to \CY_2$ of prestacks is \defn{pseudo-proper} if for every morphism $S\to \CY_2$ with $S\in \Sch$ the morphism $f_S:\CY_1\times_{\CY_2}S\to S$ is pseudo-proper.
+\end{definition}
+\begin{corollary}\label{cor:bc}
+	Let
+	\[
+	\begin{tikzcd}
+		\CY_1' \ar[r,"g_1"] \ar[d,"f'"] & \CY_1 \ar[d,"f"] \\
+		\CY_2' \ar[r,"g_2"] & \CY_2
+	\end{tikzcd}
+	\] 
+	be a Cartesian diagram in $\PreStk$ with $f$ pseudo-proper. Then the natural morphism
+	\[
+	f'_!\circ g_\CY^{!} \to g_S^{!} \circ f_!
+	\] 
+	is an isomorphism.
+\end{corollary}
+
+So we would like to verify that $\ins_\CI$ are pseudo-proper.
+\begin{proposition}\label{prop:insp}
+	Let
+	\[
+		\CY = \colim_{i\in \cat{I}}Z_i
+	\] 
+	be a pseudo-scheme. Then $\ins_i$ are pseudo-proper.
+\end{proposition}
+\begin{proof}
+	A bit of abstract nonsense: see \cite[Proposition~7.4.2]{abott}.
+\end{proof}
+
+Let $\CI,\CJ\in \Fins$ and define the prestack $\wt{X}^{\CI,\CJ}$ by the following Cartesian diagram
+\[
+\begin{tikzcd}
+	\wt{X}^{\CI,\CJ} \ar[r,"\wt{q}_{\CI}"] \ar[d,"\wt{q}_{\CJ}"] & X^{\CI} \ar[d,"\ins_{\CI}"] \\
+	X^{\CJ} \ar[r,"\ins_{\CJ}"] & \Ran X
+\end{tikzcd}
+\] 
+Now by \Cref{prop:insp} and \Cref{cor:bc}
+\[
+	\ins_\CJ^{!}\circ\ins_{\CI,!} \isoto \wt{q}_{\CJ,!}\circ \wt{q}_{\CI}^{!}.
+\] 
+Unfortunately, $\wt{X}^{\CI,\CJ}$ is still not a scheme. But what if we could find a scheme $X^{\CI,\CJ}$ with an equivalent category of sheaves?
+
+\subsection{Computing the Pushforward II}
+\paragraph{\textbf{Disclaimer:} I couldn't make sense of the paper here, so this section is my feeble attempt at finding my own argument.}
+
+We can describe $\wt{X}^{\CI,\CJ}$ as a colimit
+\[
+	\wt{X}^{\CI,\CJ} \isoto \colim_{\CI\surjto\CK\surjfrom\CJ} X^{\CK}
+\] 
+and the morphism to $X^{\CI}\times X^{\CJ}$ is the obvious one. The morphism to $X^{\CI}\times X^{\CJ}$ satisfies some important properties.
+\begin{definition}
+	Let $S\in \Sch$ and
+	\[
+		\CY = \colim_{i\in \cat{I}}Z_i
+	\] 
+	for $Z_i\in \Sch_{/S}$. We say that $\CY$ is:
+	\begin{enumerate}[(i)]
+		\item a \defn{finitary} pseudo-scheme over $S$ if $\cat{I}$ is finite;
+		\item \defn{pseudo-proper} over $S$ if $Z_i$ are prper over $S$;
+		\item \defn{finitary pseudo-proper} over $S$ if it is a finitary pseudo-scheme that's pseudo-proper over $S$.
+	\end{enumerate}
+\end{definition}
+Since $X^{\CK}\injto X^{\CI}\times X^{\CJ}$ are closed embeddings, $\wt{X}^{\CI,\CJ}$ is finitary pseudo-proper over $X^{\CI}\times X^{\CJ}$.
+
+Now define
+\[
+	\wt{X}^{\CI,\CJ}|\red \defeq \colim_{\CI\surjto \CK \surjfrom \CJ}X^{\CK}|\red.
+\] 
+Since the etale topology doesn't see nilpotents, the inclusion
+\[
+	\wt{X}^{\CI,\CJ}|\red \injto \wt{X}^{\CI,\CJ}
+\] 
+induces an equivalence
+\[
+	\Shv^{!}(\wt{X}^{\CI,\CJ}) \simto \Shv^{!}(\wt{X}^{\CI,\CJ}).
+\] 
+
+Now let $X^{\CI,\CJ}$ be the reduced subscheme defined by the union of images of $X^{\CK}$, then the morphism
+\[
+	\wt{X}^{\CI,\CJ}|\red \to X^{\CI}\times X^{\CJ}
+\] 
+factors through $X^{\CI,\CJ}$. In fact,
+\[
+	g:\wt{X}^{\CI,\CJ}|\red \to X^{\CI,\CJ}
+\] 
+is finitary pseudo-proper, surjective on $k$-points and injective on $S$-points for $S\in \Sch$. Now we use
+\begin{lemma}
+	Let $f:\CY_1\to Y_2$ be a pseudo-proper morphism of prestacks with $Y_2\in \Sch$.
+	\begin{enumerate}[(a)]
+		\item If f is \defn{injective}, i.e. $f(S)$ is a monomorphism for all $S\in \Sch$, then $f_!$ is fully faithful.
+		\item If $f$ is finitary pseudo-proper and surjective on $k$-points, then $f^{!}$ is conservative.
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	\cite[Lemma~7.4.11]{abott}.
+\end{proof}
+Hence we see that $(g_!,g^!)$ define an equivalence of categories. Hence finally, writing
+\[
+\begin{tikzcd}
+	X^{\CI} & X^{\CI,\CJ} \ar[l,"q_{\CI}"] \ar[r,"q_{\CJ}"] & X^{\CJ}
+\end{tikzcd}
+\] 
+we find that:
+\begin{corollary}
+	We have canonical isomorphisms
+	\[
+		\ins_\CJ^{!}\circ \ins_{\CI,!} \isoto \wt{q}_{\CJ,!}\circ \wt{q}_{\CI}^{!} \isoto q_{\CJ,!}\circ q_{\CI}^{!}.
+	\] 
+\end{corollary}
+
+\appendix
+\printbibliography
+
+\end{document}

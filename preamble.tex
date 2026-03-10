@@ -1,0 +1,90 @@
+\usepackage[all]{xy}
+\usepackage{tikz-cd}
+\usepackage[T1]{fontenc}
+\usepackage{xstring}
+\usepackage{xparse}
+\usepackage{xr-hyper}
+\usepackage{xcolor}
+\definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
+\usepackage[linktocpage=true,colorlinks=true,hyperindex,citecolor=blue,linkcolor=brightmaroon]{hyperref}
+\usepackage[nameinlink]{cleveref}
+\usepackage[left=1.25in,right=1.25in,top=0.75in,bottom=0.75in]{geometry}
+\setlength{\marginparwidth}{2cm}
+%\usepackage[charter,greekfamily=didot]{mathdesign}
+%\usepackage{Baskervaldx}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{mathpazo}
+\usepackage{eulervm}
+\linespread{1.05}
+
+\usepackage[nobottomtitles]{titlesec}
+\usepackage{marginnote}
+\usepackage{enumerate}
+\usepackage{longtable}
+\usepackage{aurical}
+\usepackage{microtype}
+\usepackage{mathtools}
+
+\newtheoremstyle{ega-env-style}%
+{}{}{\rmfamily}{}{\bfseries}{.}{ }{\thmnote{(#3)}}%
+
+\newtheoremstyle{ega-thm-env-style}%
+{}{}{\itshape}{}{\bfseries}{. --- }{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%
+
+\newtheoremstyle{ega-defn-env-style}%
+{}{}{\rmfamily}{}{\bfseries}{. --- }{ }{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%
+
+\theoremstyle{ega-env-style}
+\newtheorem*{env}{---}
+
+\theoremstyle{ega-thm-env-style}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{ega-defn-env-style}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{examples}{Examples}
+\newtheorem*{remark}{Remark}
+\newtheorem*{remarks}{Remarks}
+\newtheorem*{notation}{Notation}
+\newtheorem*{exercise}{Exercise}
+\newtheorem*{properties}{Properties}
+\newtheorem*{consequences}{Consequences}
+\newtheorem*{note}{Note}
+\newtheorem*{fact}{Fact}
+\newtheorem*{claim}{Claim}
+
+\makeatletter
+\def\l@subsection{\@tocline{2}{0pt}{2.5pc}{2.2pc}{}}
+\def
+\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+{\normalfont\bfseries\Large\scshape\centering}}
+\renewcommand{\@seccntformat}[1]{%
+	\ifnum\pdfstrcmp{#1}{section}=0\textsection\fi%
+\csname the#1\endcsname.~}
+\makeatother
+
+\def\mathcal{\mathscr}
+\input{preamble-base.tex}
+
+\def\shHom{\sh{H}\textup{\kern-2.2pt{\Fontauri\slshape om}}}   % sheaf Hom
+\def\shProj{\sh{P}\textup{\kern-2.2pt{\Fontauri\slshape roj}}} % sheaf Proj
+\def\shExt{\sh{E}\textup{\kern-2.2pt{\Fontauri\slshape xt}}}   % sheaf Ext
+\def\shGr{\sh{G}\textup{\kern-2.2pt{\Fontauri\slshape r}}}     % sheaf Gr
+\def\shDer{\sh{D}\,\textup{\kern-2.2pt{\Fontauri\slshape er}}} % sheaf Der
+\def\shDiff{\sh{D}\,\textup{\kern-2.2pt{\Fontauri\slshape if{}f}}\,} % sheaf Diff
+\def\shHomcont{\sh{H}\textup{\kern-2.2pt{\Fontauri\slshape om.\,cont}}}   % sheaf Hom.cont
+\def\shAut{\sh{A}\textup{\kern-2.2pt{\Fontauri\slshape ut}}}   % sheaf Aut
+\def\shSym{\sh{S}\textup{\kern-2.2pt{\Fontauri\slshape ym}}}   % sheaf Sym
+
+\makeatletter
+\newcommand{\cbigoplus}{\DOTSB\cbigoplus@\slimits@}
+\newcommand{\cbigoplus@}{\mathop{\widehat{\bigoplus}}}
+\makeatother
