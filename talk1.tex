@@ -1,19 +1,9 @@
 \documentclass[oneside]{amsart}
 \input{preamble}
+\input{notation}
 
-\renewcommand{\A}{\mathbb{A}}
-\newcommand{\muT}{\mu_{\mathrm{Tam}}}
-\newcommand{\F}{\mathbb{F}}
-\DeclareMathOperator{\Bun}{Bun}
-\DeclareMathOperator{\Tr}{Tr}
-\DeclareMathOperator{\Frob}{Frob}
-\DeclareMathOperator{\Ran}{Ran}
-\newcommand{\red}{_{\mathrm{red}}}
-\newcommand{\km}{\mathfrak{m}}
-\DeclareMathOperator{\Sym}{Sym}
-\DeclareMathOperator{\Shv}{Shv}
-\DeclareMathOperator{\Gr}{Gr}
-\def\D{\mathbb{D}}
+\renewcommand{\A}{\mathbb{A}}		% adeles
+\newcommand{\muT}{\mu_{\mathrm{Tam}}}	% Tamagawa measure
 
 \title{Introduction}
 \begin{document}
@@ -179,8 +169,8 @@ Assuming NPD, we can reduce the cohomological product formula to
 \[
 	H_c(\Ran,\CA\red) = H_c(\Ran,B\red)^{\vee}.
 \] 
-This will follow from $B\red=\D\CA\red$, the Verdier dual.
+This will follow from $B\red=\VD\CA\red$, the Verdier dual.
 
-To prove this Verdier duality we will first construct a canonical map $B\red\to \D\CA\red$ and then show that it is an ismorphism. To do this we will use factorization: it's enough to check this is an isomorphism after $!$-restriction to $X\injto \Ran$.
+To prove this Verdier duality we will first construct a canonical map $B\red\to \VD\CA\red$ and then show that it is an ismorphism. To do this we will use factorization: it's enough to check this is an isomorphism after $!$-restriction to $X\injto \Ran$.
 
 \end{document}

@@ -1,23 +1,60 @@
-\newcommand{\muT}{\mu_{\mathrm{Tam}}}
-\newcommand{\F}{\mathbb{F}}
-\DeclareMathOperator{\Bun}{Bun}
-\DeclareMathOperator{\Tr}{Tr}
-\DeclareMathOperator{\Frob}{Frob}
-\DeclareMathOperator{\Ran}{Ran}
-\newcommand{\red}{_{\mathrm{red}}}
-\newcommand{\km}{\mathfrak{m}}
-\DeclareMathOperator{\Sym}{Sym}
-\DeclareMathOperator{\Shv}{Shv}
-\DeclareMathOperator{\Gr}{Gr}
-\def\D{\mathbb{D}}
-\newcommand{\Sch}{\cat{Sch}}
-\newcommand{\Fins}{\cat{Fin}^{\mathrm{s}}}
-\newcommand{\Fun}{\cat{Fun}}
-\DeclareMathOperator{\ins}{ins}
+%%% Linear and Commutative Algebra
 
-\mathchardef\mhyphen="2D
-\newcommand{\iCat}{\cat{\infty\mhyphen Cat}}
-\newcommand{\iCatSt}{\cat{\infty\mhyphen Cat}^{\mathrm{St}}}
-\newcommand{\lMod}{\Lambda\cat{\mhyphen Mod}}
+\newcommand{\F}{\mathbb{F}}		% finite field
+\DeclareMathOperator{\Tr}{Tr}		% trace
+\DeclareMathOperator{\Frob}{Frob}	% Frobenius
+\newcommand{\km}{\mathfrak{m}}		% maximal ideal
+\DeclareMathOperator{\Sym}{Sym}		% symmetric algebra
+\DeclareMathOperator{\car}{char}	% characteristic
+
+
+%%% Categories and Functors
+
+\DeclareMathOperator{\Shv}{Shv}					% sheaf category
+\newcommand{\Fins}{\cat{Fin}^{\mathrm{s}}}			% finite non-empty sets with surjective morphisms
+\newcommand{\Fun}{\cat{Fun}}					% functor category
+\DeclareMathOperator{\ins}{ins}					% colimit morphism
+\newcommand{\Sch}{\cat{Sch}}					% schemes
+\mathchardef\mhyphen="2D					% mathmode hyphen
+\newcommand{\iCat}{\cat{\infty\mhyphen Cat}}			% infinity categories
+\newcommand{\iCatSt}{\cat{\infty\mhyphen Cat}^{\mathrm{St}}}	% stable infinity categories
+\newcommand{\lMod}{\Lambda\cat{\mhyphen Mod}}			% Lambda modules
+\newcommand{\VD}{\mathbb{D}}					% Verdier duality
+\DeclareMathOperator{\Fib}{Fib}					% fiber
+\DeclareMathOperator{\CoFib}{CoFib}				% cofiber
+\newcommand{\Spc}{\cat{Spc}}					% spaces
+\newcommand{\PreStk}{\cat{PreStk}}				% prestacks
+\newcommand{\PrL}{\cat{Pr}^L}					% PrL
+\newcommand{\PrR}{\cat{Pr}^R}					% PrR
+\DeclareMathOperator{\Maps}{Maps}				% mapping space
+
+
+%%% Spaces
+\DeclareMathOperator{\Bun}{Bun}		% stack of bundles
+\DeclareMathOperator{\Ran}{Ran}		% Ran space
+\DeclareMathOperator{\Gr}{Gr}		% Grassmannian
+
+%%% Math sub/super-text
+
+\renewcommand{\et}{_{\mathrm{\acute{e}t}}}	% etale sub
+\newcommand{\etu}{^{\mathrm{\acute{e}t}}}	% etale super
+\newcommand{\cont}{_{\mathrm{cont}}}		% continuous sub
+\newcommand{\proet}{_{\mathrm{pro\acute{e}t}}}	% proetale sub
+\newcommand{\red}{_{\mathrm{red}}}		% reduced sub
+\newcommand{\redu}{^{\mathrm{red}}}
+
+
+%%% Mathcal
+\newcommand{\CB}{\mathcal{B}}
+\renewcommand{\CH}{\mathcal{H}}
+\newcommand{\CI}{\mathcal{I}}
+\newcommand{\CJ}{\mathcal{J}}
+\newcommand{\CK}{\mathcal{K}}
+\newcommand{\CY}{\mathcal{Y}}
+
+
+%%% Misc.
 
 \def\surjfrom{\twoheadleftarrow}
+
+

@@ -2,12 +2,7 @@
 \input{preamble}
 \input{notation}
 
-\renewcommand{\et}{_{\text{\'et}}}
-\newcommand{\etu}{^{\text{\'et}}}
-\newcommand{\cont}{_{\mathrm{cont}}}
-\newcommand{\proet}{_{\text{pro\'et}}}
-\newcommand{\comp}{_{\mathrm{comp}}}
-\DeclareMathOperator{\Fib}{Fib}
+\newcommand{\comp}{_{\mathrm{comp}}}	% completion sub
 
 \usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
 \addbibresource{pwg.bib}
@@ -316,34 +311,34 @@ example, $A=\Z /m$.
 
 For all $f:X\to S$ of finite type, put $K_X=f^{!}A$ and for each $K\in D(X\et,A)$ one defines
 \[
-	\D K = \ul{\Hom}(K,K_X).
+	\VD K = \ul{\Hom}(K,K_X).
 \]
 Put $D_{C,ft}(X\et,A)$ be the sheaves which are constructible of finite $\Tor$-dimension.
 
 \begin{theorem}[{\cite[Chapter 9.6]{Fu}}]\cite{Fu}
-	If $\CF\in D_{c,ft}(X\et,A)$ then $\D\D\CF\isoto \CF$.
+	If $\CF\in D_{c,ft}(X\et,A)$ then $\VD\VD\CF\isoto \CF$.
 \end{theorem}
 \begin{proof}[Proof idea]
 	\textbf{Step 1:} Take $X=S$, then we can prove it directly \cite[Lemma 9.6.2]{Fu}.
 
-	\textbf{Step 2:} For $f$ proper $f_*\CF\isoto f_*\D\D f$. One has $f_*=f_!$, then
+	\textbf{Step 2:} For $f$ proper $f_*\CF\isoto f_*\VD\VD f$. One has $f_*=f_!$, then
 	\begin{align*}
-		f_*\D\CF &\isoto f_*\ul{\Hom}(\CF,f^{!}A) \\
+		f_*\VD\CF &\isoto f_*\ul{\Hom}(\CF,f^{!}A) \\
 		&\isoto \ul{\Hom}(f_*\CF,A) \\
-		&\isoto \D f_*\CF.
+		&\isoto \VD f_*\CF.
 	\end{align*}
 	Hence
 	\[
 		\begin{tikzcd}
-			f_*\CF \ar[r] \ar[d,"\isoto"] & f_*\D\D\CF \ar[d,"\isoto"] \\
-			\D\D f_*\CF \ar[r,"\isoto"] & \D f_*\D\CF
+			f_*\CF \ar[r] \ar[d,"\isoto"] & f_*\VD\VD\CF \ar[d,"\isoto"] \\
+			\VD\VD f_*\CF \ar[r,"\isoto"] & \VD f_*\VD\CF
 		\end{tikzcd}
 	\]
 	and we reduce to showing that the diagram commutes (see \cite[Lemma 9.6.3]{Fu}).
 	\textbf{Step 3:} Reduce to Step 2. We reduce to $X$ proper and then take the cofiber
 	\[
 		\begin{tikzcd}
-			\CF \ar[r] & \D \D \CF \ar[r] & \Delta.
+			\CF \ar[r] & \VD \VD \CF \ar[r] & \Delta.
 		\end{tikzcd}
 	\]
 	By induction on $\dim X$ one proves that $\Delta$ is supported on finitely many points
