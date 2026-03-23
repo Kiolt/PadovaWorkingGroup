@@ -1,0 +1,346 @@
+\documentclass[oneside]{amsart}
+\input{preamble}
+\input{notation}
+\usepackage[left]{showlabels}
+\usepackage[backend=biber,style=alphabetic]{biblatex}
+\addbibresource{pwg.bib}
+
+\newcommand{\pShv}{\prescript{p}{}{\Shv}}
+\newcommand{\plMod}{\prescript{p}{}{\lMod}}
+\DeclareMathOperator{\supp}{supp}
+
+\title{Stabilization of cohomology on the Ran space}
+\author{Micha{\l} Mruga{\l}a}
+
+\begin{document}
+\maketitle
+
+\setcounter{section}{-1}
+\section{Notation}
+\begin{itemize}
+	\item We often abbreviate $\Ran X$ to just $\Ran$.
+	\item We write $\mathring{\CF}^{I}$ for $\ins_I^{!}(\CF)|_{\mathring{X}^{I}}$. Similarly for $I$ replaced by $n$.
+\end{itemize}
+
+\section{The Goal}
+The goal of this talk is to prove two theorems which appeared in the last talk. They concern conditions for (complexes of) sheaves on the Ran space to behave well with respect to Verdier duality. 
+
+\begin{definition}
+	Let $a,b$ be integers $\ge 0$. We say that a sheaf $\CF\in \Shv^{!}(\Ran X)$ \defn{satisfies} $P(a,b)$ if there exists an integer $m\ge 0$ such that for any finite set $I$ with $|I|>m$
+	\[
+		\mathring{\CF}^{I}\in \pShv(\mathring{X}^{I})^{\le -a-b|I|}.
+	\] 
+\end{definition}
+
+Recall that we are using the perverse $t$-structure. Such a $t$-structure for a variety $V$ over $k$ is given by
+\[
+\pShv(V)^{\le 0} = \left\{ \CF\in \Shv(V) \middle| \forall i\in \Z,\dim\supp H^{i}(\CF) \le -i \right\}. 
+\] 
+We will often use the simple fact:
+\begin{proposition}\label{prop:ptoc}
+	Let $\CF\in \pShv(V)^{\le n}$, then $\CF\in \Shv(V)^{\le n}$.
+\end{proposition}
+\begin{proof}
+	The case $n=0$ is clear. The general case follows by shifting.
+\end{proof}
+
+We want to prove the following theorems:
+\begin{theorem}\label{thm:vd}
+	Let $X\in \Sch$ be a proper, smooth curve and $\CF\in \Shv^{!}(\Ran X)$. Suppose that for every integer $a\ge 0$, $\CF$ satisfies $P(a,1)$. Then the map
+	\[
+	C^{*}_c(\Ran, \VD\CF) \to C^{*}_c(\Ran, \CF)^{\vee}
+	\] 
+	is an isomorphism.
+\end{theorem}
+
+\begin{theorem}\label{thm:prod}
+	Let $X$ be a smooth curve and $\Lambda$ have finite cohomological dimension. Let $\CF_1,\CF_2\in \Shv^{-}(\Ran X)$ satisfy $P(a,1)$ for every integer $a\ge 1$. Assume furthermore that $\CF_1,\CF_2$ have compact cohomology sheaves. Then the map
+	\[
+		(\VD\CF_1) \boxtimes (\VD\CF_2) \to \VD(\CF_1\boxtimes\CF_2)
+	\] 
+	is an isomorphism.
+\end{theorem}
+
+\section{Proof of the First Theorem}
+\textbf{Step 1: Reduction to the $\le 0$ case.}
+
+We need to show that for every integer $k\ge 0$ the map
+\[
+	C^{*}_c(\Ran, \VD\CF)^{\le k} \to \left(C^{*}_c(\Ran, \CF)^{\vee}\right)^{\le k}
+\] 
+is an isomorphism. To make book-keeping easier we reduce to the $k=0$ case, which we can do since if $\CF$ satisfies $P(a,1)$ so does $\CF[i]$ for $i\ge 0$.
+
+\textbf{Step 2: Reduction to the truncated Ran space.}
+
+For any $n\ge 0$ there is a commutative diagram
+\[
+\begin{tikzcd}
+	C^{*}_c(\Ran, \VD\CF)^{\le 0} \ar[r] \ar[d] & (C^{*}_c(\Ran,\CF)^{\vee})^{\le 0} \ar[d] \\
+	C^{*}_c(\Ran^{\le n},\VD\CF^{\le n})^{\le 0} \ar[r] & (C^{*}_c(\Ran^{\le n},\CF^{\le n})^{\vee})^{\le 0}
+\end{tikzcd}
+\] 
+If the left and right arrows are isomorphisms, it suffices to prove that the bottom arrow is an isomorphism. We defer the proofs for the left and right arrows to the next two sections.
+
+\textbf{Step 3: Proof for the truncated Ran space.}
+Since $\Ran^{\le n}$ is finitary pseudo-proper this follows from \cite[Corollary~7.5.6]{abott} which was covered in Andrea's talk.
+
+\section{The Right Arrow}
+We prove the following (stronger) statement.
+
+\begin{proposition}\label{prop:ti}
+	Let $X$ be a smooth curve and $\CF\in \Shv^{!}(\Ran X)$. Suppose $\CF$ satisfies $P(3,0)$, then the map
+	\[
+	C^{*}_c\left( \Ran^{\le n},\CF^{\le n} \right) ^{\ge 0} \to C^{*}_c\left( \Ran, \CF \right) ^{\ge 0}
+	\] 
+	is an isomorphism for $n\gg 0$.
+\end{proposition}
+\textbf{Step 1: Reduction to the truncated Ran space.}
+
+Since
+\begin{equation}\label{eq:colim}
+C^{*}_c(\Ran,\CF) = \colim_{k\in \N} C^{*}_c(\Ran^{\le k},\CF^{\le k}),
+\end{equation} 
+there exists $M\in \Z$ such that for all $m\ge M$ the map
+\[
+C_c^{*}(\Ran^{\le m},\CF^{\le m}) \to C^{*}_c(\Ran,\CF)
+\] 
+is an isomorphism. Hence it suffices to show
+\begin{lemma}\label{prop:tit}
+	Let $X$ be a smooth curve and $\CF\in \Shv^{!}(\Ran X)$. Suppose $\CF$ satisfies $P(3,0)$, then the map
+	\[
+	C^{*}_c(\Ran^{\le n},\CF^{\le n})^{\ge 0} \to C^{*}_c(\Ran^{\le m},\CF^{\le m})^{\ge 0}
+	\] 
+	is an isomorphism for $n\gg 0$ and $m\ge n$.
+\end{lemma}
+
+\textbf{Step 2: Reduction to the calculation of the cofiber.}
+
+It suffices to handle the $m=n+1$ case. Let
+\[
+D = \CoFib\left(  C^{*}_c(\Ran^{\le n},\CF^{\le n}) \to C^{*}_c(\Ran^{\le n+1},\CF^{\le n+1})
+\right). 
+\] 
+Using the long exact sequence in cohomology, it suffices to show that
+\[
+D\in \lMod^{\le -2}.
+\] 
+
+\begin{lemma}\label{lmm:cofibcoh}
+	$D$ is canonically isomorphic to $C^{*}(\mathring{X}^{n}, \mathring{\CF}^{n})_{\Sigma_{n+1}}$.
+\end{lemma}
+Here $\Sigma_{n+1}$ is the symmetric group on $n+1$ elements.
+
+Assuming \Cref{lmm:cofib}, it suffices to show that
+\[
+	C^{*}(\mathring{X}^{n},\mathring{\CF}^{n}) \in \lMod^{\le 2}.
+\] 
+since taking coinvariants is right-exact. By \Cref{prop:ptoc} it suffices to show that $C^{*}(\mathring{X}^{n},\mathring{\CF}^{n})\in \plMod^{\le 2}$.
+
+We can factor the structure morphism of $\mathring{X}^{n}$ as
+\[
+\begin{tikzcd}[column sep=huge]
+	\mathring{X}^{n} \ar[r,"p","\text{affine}"'] & X \ar[r,"q","\text{smooth curve}"'] & \Spec k.
+\end{tikzcd}
+\] 
+Since $p$ is affine, $p_*$ is right $t-$exact for the perverse $t$-structure \cite[Theorem~4.1.1]{BBD}. Since $q$ is quasiprojective, $q_*$ is cohomologically bounded by $\le 1$ for the perverse $t$-structure \cite[4.2.4]{BBD}.
+
+\textbf{Step 3: Calculation of the cofiber.}
+To prove \Cref{lmm:cofibcoh} we first calculate
+\[
+	\CoFib(\ins^{\le n}_!\CF^{\le n}\to \ins^{\le n+1}_!\CF^{\le n+1})\in \Shv^{!}(\Ran).
+\] 
+Write $\ins^{n,n+1}$ for the inclusion $\Ran^{\le n}\to \Ran^{\le n+1}$. Then the cofiber is isomorphic to
+\[
+\ins^{\le n+1}_! \CoFib(\ins^{n,n+1}\CF^{\le n}\to \CF^{\le n+1}),
+\] 
+so we need to compute the cofiber on $\Ran^{\le n+1}$.
+
+Since $\ins^{n,n+1}$ is finitary pseudo-proper and injective, $\ins^{n,n+1}_!$ defines an equivalence of categories between $\Shv^{!}(\Ran^{\le n})$ and sheaves on its image by \cite[Lemma~7.4.11(d)]{abott}. Hence the cofiber is supported on the complement
+\[
+	(\Ran^{\le n+1}-\Ran^{\le n})\subset \Ran^{\le n+1}.
+\] 
+
+Now we give a characterization of this complement as almost a scheme. The morphism $\ins_{n+1}$ factors through
+\[
+	\ins_{n+1} /\Sigma_{n+1}:X^{n+1} /\Sigma_{n+1} \to \Ran.
+\] 
+Writing $j_{n+1}$ for the inclusion $\mathring{X}^{n+1}\to X^{n+1}$ we get an inclusion
+\[
+	j_{n+1} /\Sigma_{n+1}:\mathring{X}^{n+1} /\Sigma_{n+1} \to X^{n+1} /\Sigma_{n+1}.
+\] 
+$\ins_{n+1} /\Sigma_{n+1}$ factors through $\Ran^{\le n+1}$ and restricts to an isomorphism
+\[
+	\mathring{X}^{n+1}/\Sigma_{n+1} \simto \Ran^{\le n+1} - \Ran^{\le n}.
+\] 
+
+\begin{lemma}\label{lmm:cofib}
+	Let $\CF\in \Shv^{!}(\Ran)$, then
+	\[
+	\CoFib\left( \ins_!^{\le n}\CF^{\le n} \to \ins_!^{\le n+1}\CF^{\le n+1} \right) 
+	\] 
+	is canonically isomorphic to
+	\[
+		(\ins_{n+1} /\Sigma_{n+1})_! \circ (j_{n+1} /\Sigma_{n+1})_* (\mathring{\CF}^{n+1} /\Sigma_{n+1}).
+	\] 
+\end{lemma}
+\begin{proof}
+	This follows from the localization exact sequence. (I don't fully understand why we are guaranteed the existence of this exact sequence in this case.)
+\end{proof}
+\begin{proof}[Proof of \Cref{lmm:cofibcoh}]
+	This follows from applying $C^{*}_c$. (Note that the paper doesn't ask for $X$ to be proper, but I don't know how we can get the structure morphism from $X^{n+1} /\Sigma_{n+1}$ to define the same $*$ and $!$-pushforwards otherwise.)
+\end{proof}
+
+\section{The Left Arrow}
+We prove the following (stronger statement):
+\begin{proposition}\label{label:dualti}
+	Let $X$ be a smooth, proper curve and $\CF\in \Shv^{!}(\Ran X)$. Suppose that $\CF$ satisfies $P(2,1)$. Then the map
+	\[
+	C^{*}_c(\Ran, \VD\CF)^{\le 0} \to C^{*}_c \left( \Ran^{\le n}, \VD \CF^{\le n} \right) ^{\le 0}
+	\] 
+	is an isomorphism for $n\gg 0$.
+\end{proposition}
+In the proof of \Cref{prop:ti} we used the fact that $C^{*}_c(\Ran,-)$ commutes with colimits, but it does not commute with limits, which is a problem since
+\begin{equation}\label{eq:lim}
+\VD\CF \isoto \lim_n \ins^{\le n}_! \left( \VD \CF^{\le n} \right) .
+\end{equation} 
+However, for $k\ge 0$ the functors $C^{*}_c(\Ran^{\le k},-)$ and $\ins^{\le k,!}$ \emph{do} commute with limits, so we want to reduce to the $C^{*}_c(\Ran^{\le k},-^{\le k})$ case first.
+
+\textbf{Step 1: Reduction to the truncated Ran space.}
+
+Using \eqref{eq:colim} it suffices to show that for all $k\ge 0$ 
+\[
+C^{*}_c(\Ran^{\le k},(\VD\CF)^{\le k})^{\le 0} \to C^{*}_c(\Ran^{\le k},(\ins^{\le n}_!(\VD\CF^{\le n}))^{\le k})^{\le 0}
+\] 
+is an isomorphism.
+
+\textbf{Step 2: Commuting the limit.}
+Now we plug in \eqref{eq:lim} and use the fact that $C^{*}_c(\Ran^{\le k},-^{\le k})$ commutes with limits. Hence it suffices to show:
+\begin{lemma}
+	Let $X$ be a smooth, proper curve and $\CF\in \Shv^{!}(\Ran X)$ be a sheaf satisfying $P(2,1)$, then for any $k\ge 0$ the map
+	\[
+		C^{*}_c \left( \Ran^{\le k}, \left( \ins^{\le n}_! \left( \VD\CF^{\le n} \right) \right) ^{\le k} \right) ^{\le 0} \to C^{*}_c \left( \Ran^{\le k}, \left( \ins^{\le n-1}_! \left( \VD\CF^{\le n-1} \right) \right) ^{\le k} \right) ^{\le 0} 
+	\] 
+	for $n\gg 0$.
+\end{lemma}
+
+\textbf{Step 3: Reduction to $\mathring{X}^{k}$.}
+To prove the lemma it suffices to show the the fiber
+\[
+\CG = \Fib \left( \left( \ins^{\le n}_! \left( \VD\CF^{\le n} \right)  \right) ^{\le k} \to  \left( \ins^{\le n}_! \left( \VD\CF^{\le n-1} \right)  \right) ^{\le k}\right)
+\] 
+satisfies $C^{*}_c(\Ran^{\le k},\CG)\in \lMod^{\ge 2}$.
+
+Using the filtration
+\[
+\Ran^{\le 1}\subset \Ran^{\le 2}\subset \dots\subset \Ran^{\le k}
+\] 
+we see that it suffices to show that for all $k'\le k$
+\[
+\CoFib \left( C^{*}_c(\Ran^{\le k'-1},\CG^{\le k'-1}) \to C^{*}_c(\Ran^{\le k'},\CG^{\le k'}) \right) \in \lMod^{\ge 2}.
+\] 
+Note that we can just take $k'=k$ since $k$ is arbitrary $\ge 0$.
+
+By \Cref{lmm:cofibcoh} this cofiber is isomorphic to
+\[
+	C^{*}\left( \mathring{X}^{k},\mathring{\CG}^{k} \right)_{\Sigma_k}. 
+\] 
+Since $C^{*}(\mathring{X}^{k},\mathring{-}^{k})$ is exact, this is isomorphic to
+\[
+	\Fib\left( C^{*}\left( \mathring{X}^{k},\mathring{(\VD\CF^{\le n})}^{k} \right) \to C^{*}\left( \mathring{X}^{k}, \mathring{(\VD\CF^{\le n-1})}^{k} \right)  \right)_{\Sigma_k}.
+\] 
+Since for any sheaf $\CH\in \Shv^{!}(\mathring{X}^{k} /\Sigma_k)$ the norm map
+\[
+	C^{*}(\mathring{X}^{k},\mathring{\CH}^{k})_{\Sigma_k} \to C^{*}(\mathring{X}^{k},\mathring{\CH}^{k})^{\Sigma_k}
+\] 
+is an isomorphism, taking (co)invariants is exact, so it suffices to show that the fiber is concentrated in degrees $\ge 2$.
+
+\textbf{Step 4: Calculation of the fiber.}
+
+Since $C^{*}(\mathring{X}^{k},\mathring{-}^{k})$ is left exact, we are reduced to computing the fiber
+\[
+\Fib \left( \ins^{\le n}_!(\VD\CF^{\le n}) \to \ins^{\le n-1}_!(\VD\CF^{\le n-1}) \right) 
+\] 
+on $\Ran$. Since $\ins^{n-1,n}$ is finitary pseudo-proper it commutes with Verdier duality, so
+\begin{align*}
+	\ins_!^{\le n-1} \VD\CF^{\le n-1} &\isoto \ins_!^{\le n}\ins_!^{n-1,n} \VD\CF^{\le n-1} \\
+					    &\isoto \ins_!^{\le n} \VD\ins_!^{n-1,n}\CF^{\le n-1}.
+\end{align*}
+Hence we can pull $\Fib$ through $\ins_!^{\le n}\VD$ and need to calculate
+\[
+\CoFib\left( \ins_!^{n-1,n}\CF^{\le n-1} \to \CF^{\le n} \right) ,
+\] 
+but by \Cref{lmm:cofib} we know that it is isomorphic to
+\[
+(\ins_{n} /\Sigma_{n})_! \circ (j_{n} /\Sigma_{n})_* (\mathring{\CF}^{n} /\Sigma_{n})
+\] 
+on $\Ran^{\le n}$. Plugging this back in and unfolding compositions we find that the original fiber is
+\[
+	C^{*}\left( \mathring{X}^{k}, j_k^{!}\ins_k^{!}\ins_{n,!}\left( \VD j_{n,*} j_n^{!}\CF^{n} \right) \right)^{\Sigma_n}. 
+\] 
+And again by exactness of invariants on $\mathring{X}^{k}$, we need to show that the complex before taking invariants is concentrated in degrees $\ge 2$.
+
+Hence it suffices to prove:
+\begin{lemma}\label{lmm:xkcoh}
+	Let $\CH\in \pShv(X^{n})^{\le -n-2}$, then
+	\[
+		C^{*}\left( \mathring{X}^{k},j_k^{!}\ins_k^{!}\ins_{n,!}(\VD\CH) \right) \in \lMod^{\ge 2}.
+	\] 
+\end{lemma}
+
+\textbf{Step 5: Reduction to schemes.}
+Recall from my first talk that if
+\[
+X^{k,n}(S) = \left\{ (x_1,\dots,x_k,y_1,\dots,y_n)\in X^{k}(S)\times X^{n}(S) \middle| \{x_1,\dots,x_k\} = \{y_1\dots,y_n\}  \right\} 
+\] 
+and we write
+\[
+\begin{tikzcd}
+	X^{k} & X^{k,n} \ar[l,"q_k"'] \ar[r,"q_n"] & X^{n}
+\end{tikzcd}
+\] 
+for the projections, then
+\[
+\ins_k^{!}\circ \ins_{n,!} \isoto q_{k,!}\circ q_n^{!}.
+\] 
+So we are reduced to proving that
+\[
+	C^{*}\left( \mathring{X}^{k},j_k^{!}q_{k,!}q_n^{!}(\VD\CH) \right) \in \lMod^{\ge 2}.
+\] 
+
+\textbf{Step 6: The scheme case.}
+
+Here we will use $a$ to generally refer to structure morphisms. We will also make use of the following Cartesian square
+\[
+\begin{tikzcd}
+	\mathring{X}^{k,n} \ar[r,"j_{k,n}"] \ar[d,"\mathring{q}_k"] \ar[dr,"\wt{q}_k"] & X^{k,n} \ar[d,"q_k"] \\
+	\mathring{X}^{k} \ar[r,"j_k"] & X_k.
+\end{tikzcd}
+\] 
+By properness of $q_k$ we can use proper base change to get
+\begin{align*}
+	a^{k}_*j_k^{!}q_{k,!}q_n^{!}\VD\CH &\isoto a^{k}_*\mathring{q}_{k,!}j_{k,n}^{!}q_n^{!}\VD\CH \\
+					   &\isoto \mathring{a}^{k,n}_* \wt{q}_n^{!}\VD\CH \\
+					   &\isoto a^{n}_* \wt{q}_{n,*}\wt{q}_n^{!}\VD\CH.
+\end{align*} 
+Now we can use standard six functor formalism non-sense to rewrite
+\[
+	\wt{q}_n^{!}\VD\CH \isoto (\wt{q}_n^{*}\VD\CH) \otimes^{!} \omega.
+\] 
+Applying the projection formula we find that our desired expression is
+\[
+	C^{*}\left( X^{n},(\VD\CH)\otimes^{!}(\wt{q}_{n,*}\omega) \right) 
+\] 
+Since $\wt{q}_{n,*}\omega$ is compact this is isomorphic to
+\[
+	\shHom(\CH,\wt{q}_{n,*}\omega).
+\] 
+Since $\dim X^{n}=n$ and $\wt{q}_n$ is quasifinite, $\wt{q}_{n,*}\omega\in \pShv(X^{n})^{\ge -n}$. And now the conclusion follows from our assumption on $\CG$.
+
+
+
+\section{Variant of the Theorem}
+
+
+\printbibliography
+
+\end{document}
