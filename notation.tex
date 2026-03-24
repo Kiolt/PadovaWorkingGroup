@@ -11,7 +11,12 @@
 %%% Categories and Functors
 
 \DeclareMathOperator{\Shv}{Shv}					% sheaf category
-\newcommand{\Fins}{\cat{Fin}^{\mathrm{s}}}			% finite non-empty sets with surjective morphisms
+%\newcommand{\Fins}{\cat{Fin}^{\mathrm{s}}}			% finite non-empty sets with surjective morphisms
+\NewDocumentCommand{\Fins}{o}{%
+  \cat{Fin}^{\mathrm{s}%
+    \IfValueT{#1}{, \le #1}%
+  }%
+}
 \newcommand{\Fun}{\cat{Fun}}					% functor category
 \DeclareMathOperator{\ins}{ins}					% colimit morphism
 \newcommand{\Sch}{\cat{Sch}}					% schemes

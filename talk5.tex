@@ -1,13 +1,13 @@
 \documentclass[oneside]{amsart}
 \input{preamble}
 \input{notation}
-\usepackage[left]{showlabels}
 \usepackage[backend=biber,style=alphabetic]{biblatex}
 \addbibresource{pwg.bib}
 
 \newcommand{\pShv}{\prescript{p}{}{\Shv}}
 \newcommand{\plMod}{\prescript{p}{}{\lMod}}
 \DeclareMathOperator{\supp}{supp}
+\newcommand{\ptau}{\prescript{p}{}{\tau}}
 
 \title{Stabilization of cohomology on the Ran space}
 \author{Micha{\l} Mruga{\l}a}
@@ -20,6 +20,7 @@
 \begin{itemize}
 	\item We often abbreviate $\Ran X$ to just $\Ran$.
 	\item We write $\mathring{\CF}^{I}$ for $\ins_I^{!}(\CF)|_{\mathring{X}^{I}}$. Similarly for $I$ replaced by $n$.
+	\item If we apply multiple restrictions in a row as in the previous item, we !-pushforward back to $\Ran$ between each !-pullback.
 \end{itemize}
 
 \section{The Goal}
@@ -60,6 +61,16 @@ We want to prove the following theorems:
 	\] 
 	is an isomorphism.
 \end{theorem}
+
+These results are used in the paper in two places:
+\begin{enumerate}[(i)]
+	\item \Cref{thm:prod} is used to prove that given a certain set of conditions on the curve $X$, the ring of coefficients $\Lambda$, and a factorization algebra $\CG$ on $\Ran X$ the Verdier dual is also a factorization algebra.
+	\item Recall from Antoine's talk that we can reduce the proof of the cohomological product formula to constructing an isomorphism
+		\[
+		C^{*}_c(\Ran X, \CB) \to C^{*}_c(\Ran X, \CA)^{\vee}.
+		\] 
+		This is almost exactly the statement of \Cref{thm:vd} if $\CB\isoto \VD\CA$. However, $\CA,\CB$ don't satisfy the cohomological estimate in \Cref{thm:vd}, so we need to replace them by their reduced versions $\CA\red,\CB\red$ which do satisfy them. But I want to highlight that \Cref{thm:vd} is really at the core of the main proof in \cite{abott}.
+\end{enumerate}
 
 \section{Proof of the First Theorem}
 \textbf{Step 1: Reduction to the $\le 0$ case.}
@@ -192,7 +203,7 @@ $\ins_{n+1} /\Sigma_{n+1}$ factors through $\Ran^{\le n+1}$ and restricts to an 
 
 \section{The Left Arrow}
 We prove the following (stronger statement):
-\begin{proposition}\label{label:dualti}
+\begin{proposition}\label{prop:dualti}
 	Let $X$ be a smooth, proper curve and $\CF\in \Shv^{!}(\Ran X)$. Suppose that $\CF$ satisfies $P(2,1)$. Then the map
 	\[
 	C^{*}_c(\Ran, \VD\CF)^{\le 0} \to C^{*}_c \left( \Ran^{\le n}, \VD \CF^{\le n} \right) ^{\le 0}
@@ -332,14 +343,167 @@ Applying the projection formula we find that our desired expression is
 \] 
 Since $\wt{q}_{n,*}\omega$ is compact this is isomorphic to
 \[
-	\shHom(\CH,\wt{q}_{n,*}\omega).
+	\Hom(\CH,\wt{q}_{n,*}\omega).
 \] 
-Since $\dim X^{n}=n$ and $\wt{q}_n$ is quasifinite, $\wt{q}_{n,*}\omega\in \pShv(X^{n})^{\ge -n}$. And now the conclusion follows from our assumption on $\CG$.
+Since $\dim X^{n}=n$ and $\wt{q}_n$ is quasifinite, $\wt{q}_{n,*}\omega\in \pShv(X^{n})^{\ge -n}$. And now the conclusion follows from our assumption on $\CH$.
 
+\section{A Variant of the Theorem}
+For the proof of the cohomological product formula we will need the following variant:
+\begin{theorem}
+	Let $X$ be a proper, smooth curve and $X'\subset X$ be an open subscheme. Let $\CF'\in \Shv^{!}(\Ran X')$ satisfy $P(a,1)$ for every integer $a\ge 0$. For $\CF \defeq \bb{j}_{!}\CF'$ the map
+	\[
+	C^{*}_c(\Ran, \VD\CF) \to C^{*}_c(\Ran,\CF)^{\vee}
+	\] 
+	is an isomorphism.
+\end{theorem}
+Here $\bb{j}$ is the morphism $\Ran X'\to \Ran X$.
 
+Following the proof of \Cref{thm:vd}, and using the fact that \Cref{prop:ti} is true for non-proper curves, we are left to deal with the left arrow
+\[
+C^{*}_c(\Ran, \VD\CF)^{\le 0} \to C_c^{*}(\Ran^{\le n}, \VD\CF^{\le n})^{\le 0}.
+\] 
+Now we use the isomorphisms
+\[
+	\VD\circ \bb{j}_! \isoto \bb{j}_* \circ \VD,\qquad \VD \circ \bb{j}^{\le n}_! \isoto \bb{j}^{\le n}_*\circ \VD
+\] 
+to reduce to a lemma analogous to \Cref{prop:dualti}. Then the proof is nearly identical.
 
-\section{Variant of the Theorem}
+\section{Computing Duality at Finite Levels}
+To prove \Cref{thm:prod} we first need to show that we can compute $\VD$ on $\Ran^{\le n}$ for sufficiently large $n$.
+\begin{proposition}\label{prop:vdtrunc}
+	Let $X$ be a smooth curve and $\CF\in \Shv^{!}(\Ran X)$. Suppose that $\CF$ satisfies $P(2,1)$. Then for any $\CI$ and $n\gg 0$ the map
+	\[
+		\ptau^{\le 0}(\VD\CF)^{\CI} \to \ptau^{\le 0}(\VD\CF^{\le n})^{\CI}
+	\] 
+	is an isomorphism.
+\end{proposition}
 
+\textbf{Step 1: Reduction to fiber computation.}
+
+Without loss of generality we can replace $X^{\CI}$ by $X^{k}$ for $k\ge 0$. Since $\ins_k^{!}$ commutes with limits, we can replace the left hand side by
+\[
+\ptau^{\le 0} \left( \lim_{n'} (\VD\CF^{\le n'})^{k} \right) .
+\] 
+As before we can reduce to showing that
+\[
+\left( \Fib \left( \VD\CF^{\le n} \to \VD\CF^{\le n-1} \right)  \right) ^{k} \in \pShv(X^{k})^{\ge 2}.
+\] 
+
+\textbf{Step 2: Fiber computation.}
+
+As before, we compute the fiber to be
+\[
+	\left( \ins_k^{!}\ins_{n,!}\VD j_{n,*}\mathring{\CF}^{n} \right) ^{\Sigma_n}
+\] 
+and we can drop the $\Sigma_n$ invariants. Let
+\[
+	\CG \defeq j_{n,*}\mathring{\CF}^{n} \in \pShv(X^{n})^{\le -n-2}.
+\] 
+
+\textbf{Step 3: Reduction to scheme case.}
+
+As before rewrite
+\[
+\ins_k^{!}\ins_{n,!}\VD\CG \isoto q_{k,!}q_n^{!}\VD\CG.
+\] 
+
+\textbf{Step 4: The scheme case.}
+
+Since $q_k,q_n$ are both finite, $q_{k,!}$ is $t$-exact and $q_n^{!} $ is left $t$-exact for the perverse $t$-structure. Hence it suffices to show that $\VD\CG\in \pShv(X^{n})^{\ge 2}$ which is standard.
+
+\section{\texorpdfstring{Proof of \Cref{thm:prod}}{Proof of Product Theorem}}
+
+Note that in this section we will be working with the perverse $t$-structure.
+
+\textbf{Step 1: Initial reductions.}
+
+We need to show that for any $m_1,m_2,k\ge 0$ we have an isomorphism
+\[
+\left( \left( \VD\CF_1 \boxtimes \VD\CF_2 \right) ^{m_1,m_2} \right) ^{\le k} \to \left( \left( \VD\left( \CF_1\boxtimes\CF_2 \right)  \right) ^{m_1,m_2} \right) ^{\le k}
+\] 
+is an isomorphism. As before we can reduce to the $k=0$ case.
+
+\textbf{Step 2: Reduction to the truncated case.}
+
+For $n\ge 0$ we have a commutative diagram
+\[
+\begin{tikzcd}
+	\left( \left( \VD\CF_1\boxtimes\VD\CF_2 \right) ^{m_1,m_2} \right) ^{\le 0} \ar[r] \ar[d] & \left( \left( \VD\left( \CF_1\boxtimes\CF_2 \right)  \right) ^{m_1,m_2} \right) ^{\le 0} \ar[d] \\
+	\left( \left( \VD\CF_1^{\le n}\boxtimes\VD\CF_2^{\le n} \right) ^{m_1,m_2} \right) ^{\le 0} \ar[r]  & \left( \left( \VD\left( \CF_1^{\le n}\boxtimes\CF_2^{\le n} \right)  \right) ^{m_1,m_2} \right) ^{\le 0} 
+\end{tikzcd}
+\] 
+
+We claim that the left and right arrows are isomorphisms for $n\gg 0$, then the proof is reduced to showing that the top arrow is an isomorphism. We postpone the proof of this to the next section.
+
+\textbf{Step 3: Reduction to the scheme case.}
+
+We prove a stronger statement:
+\begin{lemma}
+	For $n\ge 0$ the map
+	\[
+	\left( \ins^{\le n}\times \ins^{\le n} \right) _! \left( \VD\CF_1^{\le n}\boxtimes\VD\CF_2^{\le n} \right) \to \left( \ins^{\le n}\times \ins^{\le n} \right) _! \VD \left( \CF_1^{\le n}\boxtimes\CF_2^{\le n} \right) 
+	\] 
+	is an isomorphism.
+\end{lemma}
+The left hand side is isomorphic to
+\[
+	\lim_{\CI_1,\CI_2\in \Fins[n]} \left( \ins_{\CI_1}\times \ins_{\CI_2} \right) _! \left( \VD\CF_1^{\CI_1}\boxtimes\VD\CF_2^{\CI_2} \right) .
+\] 
+Similarly, the right hand side is isomorphic to
+\[
+	\lim_{\CI_1,\CI_2\in \Fins[n]} \left( \ins_{\CI}\times \ins_{\CI_2} \right) _! \left( \VD \left( \CF_1^{\CI_1}\boxtimes\CF_2^{\CI_2} \right)  \right) .
+\] 
+So it suffices to show that for every $\CI_1,\CI_2\in \Fins$ the map
+\[
+\VD\CF_1^{\CI_1}\boxtimes \CF_2^{\CI_2} \to \VD\left( \CF_1^{\CI_1}\boxtimes\CF_2^{\CI_2} \right) .
+\] 
+
+\textbf{Step 4: The scheme case.}
+As $\CF_i^{\CI_i}$ are bounded above with compact cohomology sheaves we are done by \cite[Lemma~7.3.2]{abott}.
+
+\section{Side Maps II}
+We focus on the left map. The argument for the right map is almost identical, but requires a variant of \Cref{prop:vdtrunc} to be proved first.
+
+\textbf{Step 1: Reduction to cohomological bound.}
+
+Let
+\[
+\CG_i \defeq (\VD\CF_i)^{m_i},\qquad \CG_i(n) \defeq \left( \VD\CF_i^{\le n} \right) ^{m_i}
+\] 
+and
+\[
+\CE_i(n) \defeq \CoFib(\CG_i \to \CG_i(n)).
+\] 
+We have an exact triangle
+\[
+\begin{tikzcd}
+	\CE_1(n) \boxtimes \CG_2 \ar[r] & \CoFib\left( \CG_1\boxtimes\CG_2 \to \CG_1(n)\boxtimes\CG_2(n) \right) \ar[r] & \CG_1(n) \boxtimes \CE_2(n).
+\end{tikzcd}
+\] 
+By \Cref{prop:vdtrunc} for $n\gg 0$ we have $\CE_i(n)\in \pShv(X^{m_i})^{\ge 1}$. Note that we will certainly need to show that $\CG_i$ and $\CG_i(n)$ are bounded below for the perverse $t$-structure. Assuming this, and using the fact that $\Lambda$ has finite Tor dimension, we can certainly show that the cofiber is bounded below for the perverse $t$-structure. I'm not quite sure how to show it can get large enough, though.
+
+\begin{remark}
+	In our case we are fine, since we can improve the bound in \Cref{prop:vdtrunc} to be linear in $n$. At the last step of that proof we can show that $\VD\CG\in \pShv(X^{n})^{\ge n+2}$. However, this argument fails in the $D$-module case.
+\end{remark}
+
+\textbf{Step 2: Lower bound.}
+
+By \Cref{prop:vdtrunc}, to show that $\CG_i$ is bounded below it suffices to show $\CG_i(n)$ is bounded below for $n\gg 0$, so we've reduced to the $\CG_i(n)$ case.
+
+But
+\[
+	\ins^{\le n}_!\left( \VD\CF_i^{\le n} \right) \isoto \lim_{\CI\in \Fins[n]} \ins_{\CI,!}\left( \VD\CF_i^{\CI} \right) .
+\] 
+Since this limit is finite, it suffices to show that for each $\CI\in \Fins[n]$ 
+\[
+	(\VD\CF_i^{\CI})^{m_i} \in \Shv^{+}(X^{m_i}).
+\] 
+
+By assumption $\CF_i^{\CI}$ is bounded above, so $\VD\CF_i^{\CI}$ is bounded below. Now since
+\[
+\ins_{m_i}^{!}\circ \ins_{\CI,!} \isoto q_{\CI,!}\circ q_{m_i}^{!}
+\] 
+is bounded below, we are done.
 
 \printbibliography
 
