@@ -1,0 +1,360 @@
+\documentclass[oneside]{amsart}
+\input{preamble}
+\input{notation}
+
+\newcommand{\comp}{_{\mathrm{comp}}}	% completion sub
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\prestk}{\mathrm{PreStk}}
+\newcommand{\laxprestk}{\mathrm{LaxPreStk} }
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Ani}{\mathrm{Ani}}
+\newcommand{\Fin}{\mathrm{Fin}}
+\newcommand{\Sets}{\mathrm{Sets}}
+\newcommand{\diag}{\mathrm{diag}}
+
+\newtheorem{construction}[theorem]{Construction}
+\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+\addbibresource{pwg.bib}
+
+\title{The unital Ran spaces}
+\author{Runlei Xiao}
+\date{Padova, March 31, 2026}
+\begin{document}
+\maketitle
+
+\setcounter{section}{0}
+\section{Conventions and Notations}
+\begin{itemize}
+    \item $k$ is an algebraic closed field.
+    \item $\Sch$ is the category of schemes of finite type over $k$.
+    \item $X$ is a separated scheme of finite type over $k$.
+\end{itemize}
+
+\section{The motivation to construct unital Ran spaces}
+
+In the proof of the Atiyah-Bott formula from \cite{abott}, Gaitsgory obtains the cohomological product formula via
+\begin{itemize}
+    \item Non-abelian Poincaré duality;
+    \item $C^*(\Ran, \mathcal A)^\vee \simeq C^*(\Ran, \mathcal{B})$
+\end{itemize}
+Today, we  focus on the general recipe to obtain the second isomorphism.
+
+We now explain to you why you have to take this recipe, "Taking out of unit", to construct this isomorphism. From Micha\l's talk \cite[Theorem~1.3]{}\space, you might expect $\mathcal A$ satisfying cohomological estimate and $\mathbb{D}  \mathcal A \simeq \mathcal B$ and \[    
+C^*_C(\Ran, \mathbb{D} \mathcal{A}) \simeq C^*_c(\Ran, \mathcal{B})
+\]
+But 
+\begin{proposition}
+    $\mathcal{A}$ doesn't satisfy cohomological estimate and $\mathbb{D} \mathcal A$ is zero.
+\end{proposition}
+
+So we can't directly apply the Verdier duality argument; we have to do a "take unit out" modification on $\mathcal A$. The idea of these modification come from the analogies between $\Shv(\Ran)$ with factorisation structure and the category of non-unital associative $dg-$algebras. We resume some facts of non-unital associative algebras and their variations first:
+
+For the category $dg\Alg_k$ of associative dg-algebras (not necessary with unit), we have a contravariant self functor, Koszul duality\(
+       KD\colon dg\Alg^{}_k \to dg\Alg^{}_k\)
+        \[
+            KD(A) \coloneqq \ker(Hom_{A^+}(k,k) \to Hom_k(k,k))
+        \]  
+        where $A^+$ denotes the unital algebra of $A \oplus k$. 
+There are two important examples to explain why we need to take the unit out:
+\begin{itemize}
+    \item If $A$ is a unital $dg-$algebra forgetting its unit, $k$ is a direct summand of $A^+$. Therefore $KD(A) = 0$.
+    \item Let $A$ be an augmented unital algebra $k[\epsilon]/\epsilon^2$ where $\epsilon$ is degree $-1$ element. Let $A^{\mathrm{red}}$ denote the augmented ideal $(\epsilon)$ of $A$. $KD(A) \simeq uk[[u]]$ and $HH_*(A^{\mathrm{red}})^\vee \simeq HH_*(uk[[u]])$
+\end{itemize}
+
+Keep this intuition in our mind, we denote 
+\begin{notation}
+    $\Ran_{untl}$ for the unital Ran spaces, the sheaves on them are analogs of unital $dg-$algebras,
+    $\Ran_{untl,aug}$ for the unital augmented Ran spaces, the sheaves on them are analogs of augmented unital $dg-$algebras.
+\end{notation}
+
+we denote it by $\mathcal A^{\mathrm{red}}$ because: 
+\begin{itemize}
+    \item $\mathcal A^{\mathrm{\mathrm{red}}}$ satisfies cohomological estimate, the $!-$fiber of $\mathcal A^{\mathrm{red}}$ over the distinct points $\{ x_1, \dots ,x_n\} \in \Ran$ is \[  
+        \otimes_{i=1,\dots, n} C^*_{\mathrm{red}}(\Gr_{x_i})
+    \]
+    \item $\mathcal B^{\mathrm{red}} \simeq \mathbb{D} A^{\mathrm{red}}$, the $!-$fiber of $\mathcal B^{\mathrm{red}}$ over the distinct points $\{ x_1, \dots ,x_n\} \in \Ran$ is\[   
+    \otimes_{i= 1, \dots, n} C_{\mathrm{red}}^*(BG_{x_i})
+    \]
+\end{itemize}
+
+\subsection{Limit and colimit}
+%If my intuition is correct, this construction works for an enriched category also.
+In the following, we say $\infty-$category for $(\infty,1)-$category.
+We review the model of colimit and limit in the $\infty-$category. It will help us to imagine  "spaces" that are constructed later. We also disregard the size issue.
+
+\begin{construction}
+    Let $\mathrm{C}, \mathrm{D}$ be $\infty-$categories, $F\colon \C \to \D$. Applying the strightening/Unstrightening theorem, we have a cocartesian fibration $$U \colon \int_C F \to \C$$
+\end{construction}
+
+Replace $\D$ with the category $\Cat_\infty$ of $\infty-$categories, and there is the following characterization of the limit of $F$.
+
+
+
+\begin{proposition}\cite[\href{https://kerodon.net/tag/05RX}{Tag 05RX}]{kerodon}
+    The $\infty-$category of coCartesian sections $$\Fun^{CCart}_{/C}(C , \int_C F)$$ is limit of $F$
+\end{proposition}
+
+\begin{corollary}\cite[\href{https://kerodon.net/tag/05RY}{Tag 05RY}]{kerodon}
+    If $F\colon \C \to \Cat_\infty$ factor through $\Ani$, $\lim F$ is an anima
+\end{corollary}
+
+\begin{proof}
+    Because $\Ani \to \Cat_\infty$preserves small limit. The conceptual explanation is following:
+    \[  
+        \Fun^{CCart}_{/\C}(\C , \int_F\C) = \Fun_{/\C}(C, \int_F \C)
+    \]
+  All arrows are $U-$cocartesian edges, especially the non-isomorphism arrow in $\int_F \C$ is from $\C$, therefore also a $U-$coCartesian edge. Since $\int_C F \to C$ is a left fibration. Applying \cite[\href{https://kerodon.net/tag/01GY}{Tag 01GY}]{kerodon}, $\$Fun_{/\C}(C, \int_F \C)$ is a left fibration over $\Delta^0$, therefore a Kan complex \cite[\href{https://kerodon.net/tag/019D}{Tag 019D}]{kerodon}
+\end{proof}
+
+\begin{proposition}
+    Let $W$ be the collection of all $U-$coCartesian edges in $\int_CF$, the $\infty-$category of \(
+        \int_C F[W^{-1}]
+    \) is the colimit of $F$
+\end{proposition}
+
+\begin{corollary}
+      If $F\colon \C \to \Cat_\infty$ factor through $\Ani$, $\colim F$ is an anima.
+\end{corollary}
+
+\begin{proof}
+    Because all edges in $\int_F C$ are coCartesian edges.
+\end{proof}
+
+\section{Lax prestacks}
+%In the following, we consider $\Cat_\infty$ as an $(\infty)-$category.
+\begin{definition}\cite[Paragraph~2.1]{abott}
+    \emph{A lax prestack} is a functor \[   
+    \mathcal{Y} \colon  \Sch_S^{op} \to \Cat_\infty.
+    \] Applying the Straightening/Unstraightening theorem,$\mathcal{Y}$ induces Cartesian fibration \[ 
+    \int_\Sch \mathcal{Y} \to \Sch
+    \]
+    by passing to fiberwise opposite categories.
+\end{definition}
+
+\begin{remark}
+    If $\mathcal{Y}$ is a prestack, we have $\mathcal{Y} \simeq \mathcal{Y}^{op}$, because $\mathcal{Y}(S) \simeq \mathcal{Y}(S)^{op}$ for any Anima.
+\end{remark}
+
+\begin{proposition}
+The fully faithful embedding of $\prestk$ in $\laxprestk$ admits a left-adjoint    \[
+    \prestk \to \laxprestk
+\] induced by the group completion\[    
+    \Cat_\infty \to \Ani \space: \space \C \mapsto \C[\mathrm{Mor}(C)^{-1}]
+\]
+\end{proposition}
+
+\subsection{Sheave on lax prestacks}
+Let we write the "limit" description of sheaves on prestacks in Michal's more formal, namely
+
+\begin{construction}
+    Consider $\Shv^!\colon \Sch^{op} \to \Cat_\infty$, we obtain a Cartesian fibration \[   
+    \int_{\Sch}  \Shv^! \to \Sch
+    \]
+\end{construction}
+
+\begin{definition}
+    For $\mathcal{Y} \in \laxprestk$, we denote $\Shv^!(\mathcal{Y})$ the category of horizontal  functors which make the following diagram commute.% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXGludF9cXG1hdGhjYWx7WX0gXFxTY2giXSxbMiwwLCJcXGludF97XFxTaHZeIX0gXFxTY2giXSxbMSwyLCJcXFNjaCJdLFswLDFdLFswLDJdLFsxLDJdXQ==
+\[\begin{tikzcd}
+	{\int_\Sch \mathcal{Y}} && {\int_{\Sch} \Shv^!} \\
+	\\
+	& \Sch
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-1, to=3-2]
+	\arrow[from=1-3, to=3-2]
+\end{tikzcd}\]
+i.e, an object $F \in \Shv^!(\mathcal{Y})$
+\begin{itemize}
+    \item  $S \in \Sch$, $y \in \mathcal{Y}(S)$, it associates to $F_{S,y} \in \Shv^!(S)$
+    \item[New] $(y_1 \to y_2) \in \mathcal{Y}(S)$, it associates to $(F_{S,y_1} \to F_{S,y_2}) \in \Shv^!(S)$
+    \item $f \colon S' \to S, y \in \mathcal{Y(S)}$, it associates to $F_{S',f(y)} \simeq f^!(F_{S,y}) \in \Shv^!(S)$
+\end{itemize}
+Therefore, we have $Shv^! \colon \laxprestk \to \Cat_\infty$
+\end{definition}
+
+\begin{proposition}
+    For a morphism $f \colon \mathcal{Y}_1 \to \mathcal{Y}_2$, we have $f^!$ commute with colimit and limit.
+\end{proposition}
+
+\begin{proof}
+For a sheaf $F$ on a lax prestack, it is determined by its pointwise value. And  $f^!$ is right adjoint to $f_!$,therefore $f^!$ preserves limit.
+
+Let $F \in \Shv^!(\mathcal{Y}_2)$ we have $$(f^!\colim F^i)_{(S,y)} \simeq f^!(\colim F^i_{(S,y)}) \simeq \colim f^!F^i_{(S,y)}$$ over $\Shv^!(S)$, the last equivalence is because $f_!$ commute with compact objects and $Shv^!(S)$ is compactly generated.
+\end{proof}
+
+\section{Unital Ran space}
+We will construct $\Ran_{untl}$ as a lax prestack.
+\begin{notation}
+    Let $\Fin$ denote the category of finite non-empty sets and all maps. For a set $A$, the functor
+    \[  
+    I \to A^I, \thickspace \Fin^{op} \to \Sets 
+    \]
+    defines a Cartesian fibration in groupoids $A^{\Fin} \to \Fin$
+\end{notation}
+We first construct a bigger lax prestack $X^{\Fin}$, then we obtain $\Ran_{untl}$ by localisation.
+\begin{definition}
+    Let $X^{\Fin}$ be the lax prestack that assigns to $S \in \Sch$ the category \[   
+    \Map(S,X)^{\Fin}.
+    \]
+    We obtain a Cartesian fibration $\int_{\Sch \times \Fin} X^{\Fin} \to \Sch \times \Fin$ in groupoid and a Cartesian fibration $\int_{\Sch} X^{\Fin}  \to \Sch$.
+\end{definition}
+
+\begin{notation}
+    For a set $A$, let $A^{\Fin,\sim}$ denote the localization of $A^{\Fin}$ by inverting all Cartesian arrows that lie above those surjection maps in $\Fin$. I,e, we identify  $f \colon I \to A $ by their image, and keep track of the conclusion relation.
+\end{notation}
+
+\begin{definition}
+    Let $\Ran_{untl}$ denote the lax prestack $X^{\Fin, \sim}$ where $X^{\Fin, \sim} (S) = \Map(S,X)^{\Fin,\sim}$
+\end{definition}
+
+\begin{remark}
+    In the paper \cite{abott}, a unital ran space $\Ran_{untl}$ is a functor associated to $S \in \Sch$ to $Subset_f(\Map(S,X))$ where $Subset_f$ denote for the category of finite subsets with embedding. These two definitions give the same description in one space, namely $F \simeq X^{Fin,\sim}$. To check this fact, we only need to prove $Subset_f\Map(S, X) \simeq \Map(S,X)^{\Fin,\simeq}$
+
+    Since $\Map(S, X)^{\Fin} \to Subset_f(\Map(S,X))$ is a Cartesian fibration, and the cartesian arrow in $\Map(S,X)^{\Fin}$ over the surjective morphism in $\Fin$ get sent to the isomorphisms in $Subset_f(\Map(S,X))$. Moreover, for a subset $B \subset \Map(S,X)$, its fiber is  the slice category over $B$ generated by the  surjection $J \to B$, which has an initial object $\id: B \to B$, so the colimit of a category with an initial object is a point.
+\end{remark}
+
+\begin{definition}
+    By construction $\Ran_{untl} \coloneqq X^{\Fin,\sim}$,  $\Shv^!(\Ran_{untl})$ is the full subcategory of $\Shv^!(X^{\Fin})$. So $F \in \Shv(\Ran_{untl})$ is an assignment
+    \[  
+        (J \in \Fin) \mapsto F_J \in \Shv(X^J)
+    \]
+    equipped with a homotopy-compatible system of morphisms
+    \[  
+        (I \xrightarrow[]{\alpha}J) \mapsto (\diag_\alpha)^!F_I \to F_J
+    \]
+    Moreover if $\alpha$ is a surjection in $\Fin$, $(diag_\alpha)^!F_I \to F_J$ is an isomorphism.
+\end{definition}
+
+\begin{remark}
+    You will see that sheaves on $\Ran_{untl}$ encode more information from the $\alpha\colon I \to J$ injection.
+\end{remark}
+
+\section{Adjunction of forgetting and adding the unit}
+We would like to construct $\mathrm{AddUnit}\colon \Shv(\Ran) \to \Shv(\Ran_{untl})$ such that for the distinct point  $I=\{x_1, \dots, x_n\}$, $\mathcal{A} \in \Shv(\Ran)$ \[    
+    \mathrm{AddUnit}(A_{I}) = \oplus_{J \subset I} \mathcal A_J
+\]
+
+The construction of the functor $\mathrm{AddUnit}$ arise a lax prestack  $\Ran^{\to}$
+\begin{definition}
+    $\Ran^{\to}$ is a lax prestack. For each scheme $S \in \Sch$, $\Ran^{\to}(S)$ be the category 
+    \begin{itemize}
+        \item Objects are pairs $(J \subseteq I)$ of finite subsets of $\Map(S,X)$ with $J \neq \emptyset$
+        \item Morphisms from $(J \subseteq I)$ to $(J_1 \subseteq I_1)$ are inclutions $I \subseteq I_1$ such that $J =J_1$
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    Categorically, $\Ran^{\to} \simeq \Ran \times^{\to}_{\Ran_{untl}} \Ran_{untl}$ fiberwisely.
+\end{remark}
+
+We have the maps 
+\[  
+    \psi \colon \Ran^{\to} \to \Ran_{untl}, \thickspace (J\subseteq I) \mapsto I,
+\]
+\[  
+    \xi \colon \Ran^{to} \to \Ran, \thickspace  (J \subseteq I) \mapsto J
+\]
+\[  
+    \nu \colon \Ran \to \Ran^{\to}, \thickspace J \mapsto (J \subseteq J)
+\]
+
+\begin{proposition}\cite[Lemma~4.3.2]{abott}
+     The map $\psi$ is pseudo-proper
+\end{proposition}
+
+\begin{proof}
+    We first show $\Ran^{\to}(S) \to \Ran_{untl} (S)$ is a coCartesian fibration in groupoid for $S \in \Sch$. Let $I$ be an object of $\Ran_{untl}(S)$, the fiber of $\Ran^{\to}(S)$ over it is the groupoid of non empty subsets $J \subseteq I$. For a morphism $I_1 \subseteq I_2$ in $\Ran_{untl}(S)$, we have map between the corresponding fibers, given by 
+    \[
+    (J \subseteq I_1) \mapsto (J\subset I_2)
+    \]
+
+    So now we just check pseudo-properness fiberwisely. Fix $I \subset \Map(S,X)$, 
+    \[  
+    S \times_{\Ran_{untl}} \Ran^{\to} \to S
+    \]
+    is pseudo-proper, because for the index category over $I$, whose objects are the data of $J \to J' \twoheadleftarrow I$, where $J$ is a finite non-empty set. Morphisms are commutative diagrams that induce a surjection on $J$. Now the fiber product $  S \times_{\Ran_{untl}}\Ran^{\to} $ is
+    \[  
+        \colim_{J \to J' \twoheadleftarrow I} X^{J'} \times_{X^I} S.
+    \]    
+\end{proof}
+
+\begin{definition}
+    The functor 
+    \[
+    \mathrm{AddUnit} \colon \Shv(\Ran) \to \Shv(\Ran_{untl})
+    \]
+    to be the composition of $\psi_! \circ \xi^!$
+\end{definition}
+
+Explicitly, let $S \in \Sch$, let $I \subset \Ran_{untl}(S)$ corresponding to
+\[  
+    S \to X^{\circ, I} \to X^I \to \Ran \xrightarrow[]{\phi} \Ran_{untl}.
+\]
+
+\begin{proposition}
+    For $F \in \Shv(\Ran)$, the corresponding object $\mathrm{AddUnit}(F)_{S,I} \in \Shv(S)$ is given by 
+    \[  
+        \oplus_{\emptyset \neq J \subseteq I} F_{S,J}
+    \]
+\end{proposition}
+
+\begin{proof}
+Consider a Cartesian diagram with a morphism $\xi$, apply \cite[Corollary~2.3.5]{abott} on $I^! \psi_! \xi^!$, we hold this result.
+% https://q.uiver.app/#q=WzAsNSxbMiwwLCJcXFJhbl57XFx0b30iXSxbMiwyLCJcXFJhbl97dW50bH0iXSxbNCwyLCJTIl0sWzQsMCwiXFxzcWN1cF97SiBcXHN1YnNldGVxIEl9IFhfSiJdLFswLDIsIlxcUmFuIl0sWzIsMSwiSSIsMl0sWzAsMSwiXFxwc2kiXSxbMywwXSxbMywyXSxbMCw0LCJcXHhpIiwyXV0=
+\[\begin{tikzcd}
+	&& {\Ran^{\to}} && {\sqcup_{J \subseteq I} X_J} \\
+	\\
+	\Ran && {\Ran_{untl}} && S
+	\arrow["\xi"', from=1-3, to=3-1]
+	\arrow["\psi", from=1-3, to=3-3]
+	\arrow[from=1-5, to=1-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow["I"', from=3-5, to=3-3]
+\end{tikzcd}\]
+
+\end{proof}
+Now we want to construct the forgetting functor by the following observation.
+
+Consider the morphism 
+\[
+    \phi \colon \Ran \to \Ran_{untl}
+\]
+by the composition $\psi \circ \nu$. $\phi$ is not a pseudo-proper map, we will see
+
+\begin{proposition}\label{Prop:Add}\cite[Proposition~4.4.2]{abott}
+    $\phi_! \colon \Shv(\Ran) \to\Shv (\Ran_{untl})$
+    exists and identifies canonically with $\mathrm{AddUnit}$
+\end{proposition}
+
+\begin{remark}
+    This functor is the first time to show you the power of the $(\infty,2)-$category.
+\end{remark}
+
+\begin{definition}
+     $\mathrm{ObvlUnit}\coloneqq \phi^!$
+\end{definition}
+
+We need the following lemma to prove Proposition \ref{Prop:Add}.
+\begin{lemma}
+    \[
+    \id_{\Shv(\Ran)} \xrightarrow[]{\sim} (\nu^! \circ \xi^!)
+    \]
+\end{lemma}
+\begin{proof}
+    because $\xi \circ \nu \simeq \id$, therefore apply $\Shv$, we get our result.
+\end{proof}
+
+\begin{corollary}
+    The functor $\nu_!$ identifies to $\xi^!$
+\end{corollary}
+
+\begin{proof}
+    By the uniqueness of adjunction.
+\end{proof}
+
+Therefore we have $\mathrm{AddUnit} = \psi_!\circ \xi^! \simeq \psi_! \circ \nu_! \simeq \phi_!$
+
+
+\appendix
+\printbibliography
+
+\end{document}
